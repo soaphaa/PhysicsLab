@@ -1,0 +1,279 @@
+@font-face {
+    font-family: 'minecraft-font';
+    src: url('./assets/MinecraftRegular-Bmg3.otf') format('opentype'); /*opentype --> otf, truetype --> ttf, woff --> woff */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family:'geist';
+    src: url('./assets/Geist-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Basic reset to remove weird browser margins */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center; 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'geist', sans-serif;
+    color: #d0e6f1;
+    margin: 0;
+    background-color: #121212;
+}
+ 
+/* TITLE SECTION*/
+.hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 100px;
+    letter-spacing: -1.75px;
+    padding: 10 15;
+}
+
+h3{
+    font-size: 60px;
+    margin-bottom:20px;
+    color: #d0e6f1;
+}
+
+p {
+    font-size: 18px;
+    margin-top: 10px;
+    line-height:1.7;
+}
+
+button{
+    background-color: #d0e6f1;
+    color: #212121;
+    border: none;
+    padding: 10px 20px;
+    font-family:'geist', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.5s ease;
+}
+
+button:hover {
+    background-color: #6fb3d5;
+}
+
+.top-nav {
+    background: linear-gradient(135deg, #d0e6f1 0%, #a0c0cd 100%);
+    opacity: 0.95;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px #121212;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition:all 0.5s ease;
+}
+
+.nav-brand{
+    font-size:1.8rem;
+    font-weight:bold;
+    letter-spacing: 0.5px;
+}
+
+.nav-menu{
+    display:flex;
+    list-style:none;
+    gap: 2rem;
+}
+
+.nav-link{
+    color:white;
+    text-decoration:none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid white;
+}
+
+.sidebar{
+    width: 200px;
+    background-color:#6e9bc1;
+    color: white;
+    padding: 2rem 0;
+    overflow-y:auto;
+    box-shadow:2px 0 5px #000000;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    z-index: 50;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.sidebar-header{
+    padding:0 1.5rem;
+    font-size:1.1rem;
+    font-weight: 1.5rem;
+    margin-bottom: 1.5rem;
+    color:antiquewhite;
+}
+
+.sidebar.minimized {
+    width: 60px;
+    padding: 1rem 0;
+}
+
+/*remove anything on the sidebar when it's minimized */
+ 
+.sidebar.minimized .sidebar-header,
+.sidebar.minimized .unit-name,
+.sidebar.minimized .subtopic,
+.sidebar.minimized .coming-soon,
+.sidebar.minimized .subtopic-list {
+    display: none;
+}
+
+.sidebar.minimized .unit-item {
+    text-alight: center;
+    margin-bottom: 1rem;
+}
+
+.minimize-btn{
+    position: absolute;
+    width: 50px;
+    bottom: 20px;
+    right: 20px;
+    padding: 0.75rem;
+    color:white;
+    cursor:pointer;
+    font-size: 1.2rem;
+    background-color: rgba(103, 186, 255);
+    transition: background-color 0.3s ease;
+    border-radius:0;
+    font-weight: bold;
+}
+
+.minimize-btn:hover{
+    background-color: rgba(53, 132, 197);
+
+}
+
+.unit-list{
+    list-style:none;
+}
+
+.unit-item{
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.unit-item.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.unit-name{
+    display:block;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.unit-item:not(.disabled):hover .unit-name {
+    background-color: rgba(103, 186, 255, 0.4);
+    padding-left: 2rem;
+}
+ 
+.unit-item.active .unit-name {
+    background-color: rgba(48, 162, 255, 0.2);
+    border-left: 3px solid #3034aa;
+    padding-left: 1.2rem;
+}
+ 
+.coming-soon {
+    display: inline-block;
+    font-size: 0.75rem;
+    background-color: #7f8c8d;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-left: 0.5rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .main-container {
+        margin-left: 0;
+    }
+ 
+    .sidebar {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        max-height: 300px;
+        border-bottom: 1px solid #ecf0f1;
+        z-index: 40;
+    }
+ 
+    .sidebar.minimized {
+        width: 100%;
+        padding: 1rem;
+    }
+ 
+    .sidebar.minimized .unit-item {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+ 
+    .subtopic-list {
+        max-height: none;
+    }
+}
+ 
+@media (max-width: 480px) {
+    .sidebar {
+        max-height: 250px;
+    }
+ 
+    .content {
+        padding: 1rem;
+    }
+ 
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+}
+ 
+
