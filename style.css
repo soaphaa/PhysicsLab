@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'minecraft-font';
-    src: url('./assets/MinecraftRegular-Bmg3.otf') format('opentype'); /*opentype --> otf, truetype --> ttf, woff --> woff */
+    src: url('./assets/MinecraftRegular-Bmg3.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -27,22 +27,40 @@ html {
 
 body {
     font-family: 'geist', sans-serif;
+    font-size: 20px;
     color: #d0e6f1;
     margin: 0;
     background-color: #121212;
+}
+
+/* ============================================
+   MAIN CONTAINER - MOVED OUT OF MEDIA QUERY
+   ============================================ */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 60px);
+    margin-left: 200px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-container.sidebar-minimized {
+    margin-left: 60px;
 }
  
 /* TITLE SECTION*/
 .hero {
     min-height: 100vh;
-    display: flex;
+    width: 100%;   
+    display: flex; 
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 40px;
 }
 
 h1 {
+    justify-content: center;
     font-weight: normal;
     font-size: 100px;
     letter-spacing: -1.75px;
@@ -75,6 +93,30 @@ button{
 
 button:hover {
     background-color: #6fb3d5;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #d0e6f1 0%, #a0c0cd 100%);
+    color: #212121;
+    border: 2px solid transparent;
+    padding: 20px 40px;
+    font-size: 30px;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    border-color: #6fb3d5;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #6fb3d5, inset 0 0 10px rgba(107, 179, 213, 0.2);
+}
+
+.btn-primary:active {
+    transform: scale(0.92);
+    box-shadow: 0 0 5px #6fb3d5, inset 0 0 20px rgba(107, 179, 213, 0.6);
+    background: linear-gradient(135deg, #6fb3d5 0%, #4a8fa8 100%);
 }
 
 .top-nav {
@@ -128,7 +170,6 @@ button:hover {
     background-color:#6e9bc1;
     color: white;
     padding: 2rem 0;
-    overflow-y:auto;
     box-shadow:2px 0 5px #000000;
     position: fixed;
     left: 0;
@@ -141,7 +182,7 @@ button:hover {
 .sidebar-header{
     padding:0 1.5rem;
     font-size:1.1rem;
-    font-weight: 1.5rem;
+    font-weight: bold;
     margin-bottom: 1.5rem;
     color:antiquewhite;
 }
@@ -162,28 +203,27 @@ button:hover {
 }
 
 .sidebar.minimized .unit-item {
-    text-alight: center;
+    text-align: center;
     margin-bottom: 1rem;
 }
 
 .minimize-btn{
-    position: absolute;
     width: 50px;
-    bottom: 20px;
-    right: 20px;
+    right:20px;
+    position: absolute;
     padding: 0.75rem;
     color:white;
     cursor:pointer;
     font-size: 1.2rem;
-    background-color: rgba(103, 186, 255);
+    background-color: rgba(103, 186, 255, 0.3);
     transition: background-color 0.3s ease;
-    border-radius:0;
+    border: none;
+    border-radius: 0;
     font-weight: bold;
 }
 
 .minimize-btn:hover{
-    background-color: rgba(53, 132, 197);
-
+    background-color: rgba(53, 132, 197, 0.5);
 }
 
 .unit-list{
@@ -194,7 +234,6 @@ button:hover {
     margin-bottom: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
-
 }
 
 .unit-item.disabled{
@@ -230,20 +269,90 @@ button:hover {
     margin-left: 0.5rem;
 }
 
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
+.homepage {
+    flex: 1;
+    width: 100%;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: rgba(103, 186, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 250px;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+}
+
+.feature-card h3{
+    font-size: 45px;
+    margin-bottom: 1rem;
+    color: #d0e6f1;
+}
+
+.feature-card p{
+    font-size: 20px;
+    color: #a0c0cd;
+    line-height: 1.5;
+}
+
+.feature-card:hover {
+    background: rgba(103, 186, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.section.active h2 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #d0e6f1;
+}
+
+.section.active p {
+    font-size: 18px;
+    color: #a0c0cd;
+    max-width: 600px;
+}
+
 @media (max-width: 768px) {
     .main-container {
         margin-left: 0;
     }
- 
+
     .sidebar {
         position: absolute;
         width: 100%;
         top: 60px;
         max-height: 300px;
-        border-bottom: 1px solid #ecf0f1;
+        border-bottom: 1px solid #333;
         z-index: 40;
     }
  
@@ -275,5 +384,21 @@ button:hover {
         font-size: 1.5rem;
     }
 }
- 
 
+.lessons-container{
+    width: 100%;
+    padding: 2rem;
+}
+
+.topic-category{
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.topic-category h3{
+    font-size: 30px;
+    color: #d0e6f1;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #6fb3d5;
+    padding-bottom: 0.5rem;
+}

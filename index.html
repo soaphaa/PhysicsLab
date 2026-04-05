@@ -12,12 +12,12 @@
     <nav class="top-nav">
         <div class="nav-brand">PhysicsLab</div>
         <ul class="nav-menu">
-            <li><a href="#" data-section="home" class="nav-link active">Home</a></li>
-            <li><a href="#" data-section="lessons" class="nav-link">Lessons</a></li>
-            <li><a href="#" data-section="simulation" class="nav-link">Simulation</a></li>
-            <li><a href="#" data-section="practice" class="nav-link">Practice</a></li>
-            <li><a href="#" data-section="ai" class="nav-link">Personal AI Tutor</a></li>
-            <li><a href="#" data-section="formulas" class="nav-link">Formula Sheet</a></li>
+            <li><a href="#" onclick="navigateTo('home')" class="nav-link active">Home</a></li>
+            <li><a href="#" onclick="navigateTo('lessons')" class="nav-link">Lessons</a></li>
+            <li><a href="#" onclick="navigateTo('simulation')" class="nav-link">Simulation</a></li>
+            <li><a href="#" onclick="navigateTo('practice')" class="nav-link">Practice</a></li>
+            <li><a href="#" onclick="navigateTo('ai')" class="nav-link">Personal AI Tutor</a></li>
+            <li><a href="#" onclick="navigateTo('formulas')" class="nav-link">Formula Sheet</a></li>
         </ul>
         
     </nav>
@@ -26,7 +26,11 @@
         
         <!-- Left sidebar containing all the physics units MINIMIZABLE!-->
         <aside class="sidebar">
-
+            
+            <button class="minimize-btn" id="minimize-btn" title="Minimize sidebar">
+                ☰
+            </button>
+            
             <div class="sidebar-header">Topics</div>
             <ul class="unit-list">
                 <li class="unit-item active" data-unit="projectile">
@@ -54,48 +58,99 @@
                     <span class="coming-soon">Coming Soon</span>
                 </li>
             </ul>
-            <button class="minimize-btn" id="minimizeBtn" title="Minimize sidebar">
-                ☰
-            </button>
         </aside>
+        
         
         <main class="homepage">
             
+            <!-- HOME SECTION - ADD active CLASS -->
             <section id="home" class="section active">
                 <div class="hero">
                     <h1>PhysicsLab</h1>
                     <p class="tagline">Where physics finally makes sense.</p>
-                    <p class="description">Stop memorizing formulas. Start understanding.</p> <!--bars ahh motiavtional quote-->
-                    
-                    <button class="btn btn-primary" onclick="navigateTo('lessons')">
+                    <p class="description">Stop memorizing formulas. Start understanding.</p>
+                    <button class="btn btn-primary" onclick="document.querySelector('.features-grid').scrollIntoView({behavior: 'smooth'})">
                         Get Started
                     </button>
                 </div>
                 
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>Structured Lessons</h3>
-                        <p>Learn physics step by step with a guided lesson path and checkpoints for progress</p>
-                        
+                    <div class="feature-card" onclick="navigateTo('lessons')">
+                        <h3>Lessons</h3>
+                        <p>Learn physics step by step...</p>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card" onclick="navigateTo('simulation')">
                         <h3>Simulations</h3>
-                        <p>Interact with real-time animations and visualizations of physics concepts.</p>
+                        <p>Interact with real-time animations...</p>
                     </div>
-                    <div class="feature-card">
-                        <h3>Practice Problems & Tests</h3>
-                        <p>Master concepts with endless practice problems at adjustable difficulty levels.</p>
+                    <div class="feature-card" onclick="navigateTo('practice')">
+                        <h3>Practice</h3>
+                        <p>Master concepts with endless practice...</p>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card" onclick="navigateTo('ai')">
                         <h3>AI Tutor</h3>
-                        <p>Get personalized explanations and step by step breakdowns of physics problems you send in.</p>
+                        <p>Get personalized explanations...</p>
                     </div>
                 </div>
             </section>
             
+            <!-- Lessons section -->
+            <section id="lessons" class="section">
+                <h2>Lessons</h2>
+                
+                <div class="lessons-container">
+                    <div class="topic-category">
+                        <h3>Projectile Motion</h3>
+                        <div class="lessons-grid">
+                            <div class="lesson-card" onclick="navigateTo('lesson-intro')">
+                                <h4>Introduction to Projectile Motion</h4>
+                                <p>Learn the basics of how objects move through the air</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- LESSON PAGES -->
+            <section id="lesson-intro" class="section">
+                <h2>Introduction to Projectile Motion</h2>
+                <div class="lesson-content">
+                    <p>Your lesson content here</p>
+                    <button class="btn btn-primary" onclick="navigateTo('lessons')">Back to Lessons</button>
+                </div>
+            </section>
+            
+            <!-- SIMULATION SECTION -->
+            <section id="simulation" class="section">
+                <h2>Simulations</h2>
+                <p>Have a few buttons with images of each simulation with category sorting</p>
+            </section>
+            
+            <!-- PRACTICE SECTION -->
+            <section id="practice" class="section">
+                <h2>Practice</h2>
+                <p>Your practice problems here</p>
+            </section>
+            
+            <!-- AI TUTOR SECTION -->
+            <section id="ai" class="section">
+                <h2>AI Tutor</h2>
+                <p>Chat layout</p>
+            </section>
+
+            <!-- FORMULAS SECTION -->
+             <section id="formulas" class="section">
+                <h2>Formula Sheet!</h2>
+                <p>This is the general Physics Formula sheet, following the SPH3U/4U curriculum</p>
+                <div class="formulas-content">
+                    <img src="assets/Physics formula sheet.png" alt="Physics Formula sheet">
+                </div>
+             </section>
+            
         </main>
         
     </div>
-        <script src="script.js"></script>
+    <script src="navigation.js"></script>
 </body>
 </html>
