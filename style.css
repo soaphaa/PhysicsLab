@@ -385,9 +385,74 @@ button:hover {
     }
 }
 
-.lessons-container{
-    width: 100%;
+.lesson-pathway {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.lesson-node {
+    text-align: center;
     padding: 2rem;
+    background: rgba(103, 186, 255, 0.1);
+    border-radius: 12px;
+    min-width: 150px;
+    transition: all 0.3s ease;
+}
+
+.lesson-node.completed {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4caf50;
+}
+
+.lesson-node.active {
+    background: rgba(103, 186, 255, 0.3);
+    border: 2px solid #6fb3d5;
+    transform: scale(1.05);
+}
+
+.lesson-node.locked {
+    background: rgba(127, 140, 141, 0.1);
+    border: 2px solid #7f8c8d;
+    opacity: 0.6;
+}
+
+.node-circle {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1rem;
+    background: #6fb3d5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.lesson-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: left;
+}
+
+.lesson-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.lesson-buttons .btn {
+    flex: 1;
+    max-width: 300px;
 }
 
 .topic-category{
@@ -401,4 +466,98 @@ button:hover {
     margin-bottom: 1.5rem;
     border-bottom: 2px solid #6fb3d5;
     padding-bottom: 0.5rem;
+}
+
+.simulations-container {
+    width: 100%;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.simulation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.simulations-card {
+    background: rgba(103, 186, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.simulations-card:hover {
+    background: rgba(103, 186, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.sim-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(103, 186, 255, 0.2), rgba(107, 179, 213, 0.2));
+    overflow: hidden;
+}
+
+.sim-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.simulations-card h4 {
+    font-size: 20px;
+    color: #d0e6f1;
+    padding: 1rem 1rem 0.5rem;
+    margin: 0;
+}
+
+.simulations-card p {
+    font-size: 14px;
+    color: #a0c0cd;
+    padding: 0 1rem 1rem;
+    margin: 0;
+}
+
+.sim-panel{
+    display: flex;
+    gap: 20px;
+}
+
+.canvas-box{
+    flex:1;
+    background:#000000;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+canvas{
+    display: block;
+    width: 100%;
+    height: 400px;
+}
+
+.controls {
+    width: 200px;
+    background:#a0c0cd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.control {
+    margin-bottom: 20px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.value{
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+    color: #0066cc;
+    border: 1px solid #0066cc;
 }
