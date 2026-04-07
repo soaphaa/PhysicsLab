@@ -1,60 +1,80 @@
-//blank rectangle
-const canvas = document.getElementById('physicsCanvas');
-const ctx = canvas.getContext('2d'); //get the canvas (paintbrush, has methods like arc, fillRect)
+// DEBUG: Check if script is loading
+console.log('freefalling-sim.js loaded!');
+
+// DEBUG: Check if canvas exists
+const canvas = document.getElementById('canvas');
+console.log('Canvas element:', canvas);
+
+if (!canvas) {
+    console.error('❌ CANVAS NOT FOUND! Check your HTML id="canvas"');
+} else {
+    console.log('✅ Canvas found!');
+    console.log('Canvas size:', canvas.width, 'x', canvas.height);
+}
+
+canvas.width = canvas.parentElement.offsetWidth;
+canvas.height = canvas.parentElement.offsetHeight;
+
+const ctx = canvas.getContext('2d');
+console.log('Context:', ctx);
+
+//canvas will fit the size of the screen
+canvas.width = canvas.parentElement.offsetWidth;
+console.log('Canvas width set to:', canvas.width);
 
 //setting values
 let ball = {
     x:0,
     y:0,
-    vx:0, //HORIZONTAL velocity (0 cuz unused)
-    vy:0, //VERTICAL velocity (base value, determines vi and vf)
+    vx:0,
+    vy:0,
     radius:15, 
-    isMoving:true
+    isMoving:false //initially doesnt move
 }
 
 let physics = {
-    gravity: 0.5, //basically how much vy increases each frame
+    gravity: 9.81,
+    pixelScale: 200,
     startHeight: 100,
-    timeStep: 0.016 //real time passing each frame (60fps)
+    timeStep: 0.016
 };
 
 function reset() {
-    //resets position
     ball.x = canvas.width / 2;
     ball.y = physics.startHeight;
-    ball.vy = 0; //vi=0!!
-    ball.isMoving = true;
+    ball.vy = 0;
+    ball.isMoving = false;
+    console.log('Ball reset to:', ball.x, ball.y);
 }
 
 function updatePhysics(){
     if(!ball.isMoving) return;
 
-    ball.vy += physics.gravity * physics.timeStep; //(v=at)
-    ball.y += ball.vy * physics.timeStep; //(d=vt)
+    const gravityPixelsPerFrame = (physics.gravity * physics.pixelScale) / (60 * 60);
+    ball.vy += gravityPixelsPerFrame;  // Velocity increases each frame
+    ball.y += ball.vy;  // Position changes by velocity
 
     const groundLevel = canvas.height - ball.radius;
     if (ball.y >= groundLevel){
         ball.y = groundLevel;
-        ball.vy =0; //when it reaches ground, no more velocity (after Vf ofc)
+        ball.vy =0;
         ball.isMoving = false;
     }
 }
 
 function draw(){
     ctx.fillStyle = '#2b5b9b';
-    ctx.fillRect(0, 0, canvas.width, canvas.height); //fill entire canvas with this colour
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#00ff00'; 
-    ctx.lineWidth = 3;  // Make the line 3 pixels thick
-    ctx.beginPath();  // Start drawing a path/line
-    const groundLevel = canvas.height - ball.radius; //rewrite calculation
+    ctx.beginPath();
+    const groundLevel = canvas.height - ball.radius;
     ctx.moveTo(0, groundLevel);
     ctx.lineTo(canvas.width, groundLevel);
     ctx.stroke();
 
     ctx.fillStyle = '#ff6b6b';
-    ctx.beginPath(); //method to begin drawing the circle movement
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2); //get the ball data
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
     ctx.fill();
 
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
@@ -64,43 +84,74 @@ function draw(){
     ctx.lineTo(ball.x, ball.y + ball.vy*2);
     ctx.stroke();
 
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '14px Arial';
+
     ctx.fillText(
-        'Velocity: ${ball.vy.toFixed(2)} px/frame',
+        `Velocity: ${ball.vy.toFixed(2)} px/frame`,
         20,
         30
     );
 
     const heightAboveGround = groundLevel - ball.y;
     ctx.fillText(
-        'Height: ${Math.max(0, heightAboveGround).toFixed(0)} px',
+        `Height: ${Math.max(0, heightAboveGround).toFixed(0)} px`,
         20,
-        30
+        55
     );
 }
 
-
-
 //actual animation
-function animate(){
-    updatePhysics(); //calculate new position constnatly
+function animate() {
+    updatePhysics();
     draw();
     requestAnimationFrame(animate);
 }
+ 
 
-//INPUTTING ALL THE HTML ELEMENTS (USER INPUT)
-const gravityInput = document.getElementById('gravity');
-const heightInput = document.getElementById('height');
-const sizeInput = document.getElementById('size');
-const reset = document.getElementById('reset');
-
-const gravityVal = document.getElementById('gravityVal');
-const heightVal = document.getElementById('heightVal');
-const sizeVal = document.getElementById('sizeVal');
+function reset() {
+    ball.x = canvas.width / 2;
+    ball.y = physics.startHeight;
+    ball.vy = 0;
+    ball.isMoving = false;  // Ball stays still until Start is clicked
+    draw();  // Redraw immediately so we see the ball at top
+}
  
 
 
-//initialize ball position at the start
-reset();
 
-//runs forever
+
+const heightInput = document.getElementById('height');
+const startBtn = document.getElementById('start');
+const resetBtn = document.getElementById('reset');
+ 
+const gravityVal = document.getElementById('gravityVal');
+const heightVal = document.getElementById('heightVal');
+ 
+// Height slider
+if (heightInput) {
+    heightInput.addEventListener('input', (e) => {
+        physics.startHeight = parseFloat(e.target.value);
+        heightVal.textContent = physics.startHeight;
+        reset();
+    });
+}
+ 
+// Start button - begins the fall
+if (startBtn) {
+    startBtn.addEventListener('click', () => {
+        reset();
+        ball.isMoving = true;  // NOW the ball falls
+    });
+}
+ 
+// Reset button - puts ball back at top
+if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+        reset();
+    });
+}
+ 
+
+reset();
 animate();

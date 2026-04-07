@@ -35,9 +35,23 @@ function navigateTo(sectionId){
     if(targetSection){
         targetSection.classList.add('active');
     }
+
+    //ensures my code in freefalling-sim.js WORKS! AND DOESNT INTERFEERE (PLEASEEEEEEEEE I NEED THIS)
+
+    if(sectionId === 'sim-dropping'){
+        // Wait a tiny bit for the section to become visible, then resize canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('canvas');
+            if(canvas){
+                // Recalculate canvas size based on its now-visible parent
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+                console.log('Canvas restarted at:', canvas.width, 'x', canvas.height);
+            }
+        }, 100);  // 100ms delay
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigationListeners();
 });
-
