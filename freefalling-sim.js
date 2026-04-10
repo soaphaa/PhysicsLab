@@ -85,6 +85,7 @@ function updatePhysics(){
         ball.vy = 0;
         ball.isMoving = false;
     }
+    saveStats();
 }
 
 function draw(){
@@ -223,3 +224,17 @@ if (heightToggle) {
  
 reset();
 animate();
+
+function saveStats(){
+    localStorage.setItem('physicsLabStats', JSON.stringify(stats));
+
+}
+
+function loadStats(){
+    const saved=localStorage.getItem('physicsLabStats');
+    if(saved){
+        stats = JSON.parse(saved);
+    }
+}
+
+loadStats();

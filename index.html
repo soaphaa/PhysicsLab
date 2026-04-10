@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physics Lab</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylenew.css">
     <link rel="stylesheet" href="sim.css">
 </head>
 
 <body>
     <!-- Top Nagivation Bar-->
     <nav class="top-nav">
-        <div class="nav-brand">PhysicsLab</div>
+        <div class="nav-brand">Physics<span style="color: #0061f3;">Lab</span></div>
+        
         <ul class="nav-menu">
             <li><a href="#" onclick="navigateTo('home')" class="nav-link active">Home</a></li>
-            <li><a href="#" onclick="navigateTo('lessons')" class="nav-link">Lessons</a></li>
+            <li><a href="lessons.html" class="nav-link">Lessons</a></li>
             <li><a href="#" onclick="navigateTo('simulation')" class="nav-link">Simulation</a></li>
             <li><a href="#" onclick="navigateTo('practice')" class="nav-link">Practice</a></li>
-            <li><a href="#" onclick="navigateTo('ai')" class="nav-link">Personal AI Tutor</a></li>
+            <li><a href="#" onclick="navigateTo('ai')" class="nav-link">AI Tutor</a></li>
             <li><a href="#" onclick="navigateTo('formulas')" class="nav-link">Formula Sheet</a></li>
         </ul>
         
@@ -67,12 +68,19 @@
             <!-- HOME SECTION - ADD active CLASS -->
             <section id="home" class="section active">
                 <div class="hero">
+                    <div class="hero-badge">INTERACTIVE PHYSICS LEARNING</div>
                     <h1>PhysicsLab</h1>
                     <p class="tagline">Where physics finally makes sense.</p>
                     <p class="description">Stop memorizing formulas. Start understanding.</p>
-                    <button class="btn btn-primary" onclick="document.querySelector('.features-grid').scrollIntoView({behavior: 'smooth'})">
-                        Get Started
-                    </button>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="document.querySelector('.features-grid').scrollIntoView({behavior: 'smooth'})">
+                            Get Started
+                        </button>
+                        <button class="btn btn-secondary" onclick="navigateTo('simulation')">Explore Simulations
+                            
+                        </button>
+                        
+                    </div>
                 </div>
                 
                 <div class="features-grid">
@@ -91,59 +99,6 @@
                     <div class="feature-card" onclick="navigateTo('ai')">
                         <h3>AI Tutor</h3>
                         <p>Get personalized explanations...</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- LESSON PATHWAY (duolingo style) -->
-            <section id="lessons" class="section">
-                <h2>Lessons - Projectile Motion</h2>
-                <div class="lesson-pathway">
-                    <!-- LESSON #1-->
-                    <div class="lesson-node completed">
-                        <div class="node-circle">✅</div>
-                        <h3>Introduction</h3>
-                        <p>Learn the basics!</p>
-                        <button class="btn btn-primary" onclick="navigateTo('lesson-intro')">Start</button>
-                    </div>
-                    <!-- LESSON #2-->
-                    <div class="lesson-node completed">
-                        <div class="node-circle">✓</div>
-                        <h3>Components</h3>
-                        <p>Horizontal & Vertical</p>
-                        <button class="btn btn-primary" onclick="navigateTo('lesson-components')">Start</button>
-                    </div>
-                    
-                    <div class="lesson-node locked">
-                        <div class="node-circle">🔒</div>
-                        <h3>Time of Flight</h3>
-                        <p>Calculate duration</p>
-                        <button class="btn btn-primary" disabled>Locked</button>
-                    </div>
-                    
-                </div>
-                <!-- <div class="lessons-container">
-                    <div class="topic-category">
-                        <h3>Projectile Motion</h3>
-                        <div class="lessons-grid">
-                            <div class="lesson-card" onclick="navigateTo('lesson-intro')">
-                                <h4>Introduction to Projectile Motion</h4>
-                                <p>Learn the basics of how objects move through the air</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div> -->
-            </section>
-            
-            <!--LESSON PAGE individual-->
-            <section id="lesson-intro" class="section">
-                <h2>Intro to Projectile Motion</h2>
-                <div class="lesson-content">
-                    <p>Insert paragraphs lessons blabla</p>
-                    <div class="lesson-buttons">
-                        <button class="'btn btn-primary" onclick="navigateTo('lesson-pathway')">Return to home</button>
-                        <button class="btn btn-primary" onclick="navigateTo('lesson-components')">Next Lesson →</button>
                     </div>
                 </div>
             </section>
@@ -191,7 +146,7 @@
                     </div>
                 </div>
             </section>
-
+            
             <!--Simulation #1 Dropping an Object (this gonna take a while)-->
             <section id="sim-dropping" class="section">
                 <h3>Dropping a ball from height x</h3>
@@ -199,60 +154,57 @@
                     <div class="canvas-box">
                         <canvas id="canvas"></canvas>
                     </div>    
-
+                    
                     <div class="controls">
                         <div class="controls-header">Controls</div>
-                          <div class="sim-info">
+                        <div class="sim-info">
                             <strong>Gravity:</strong> 9.81 m/s² (Earth)<br>
                             Click "Start Fall" to begin the simulation
                         </div>
+                        
+                    </div>
+                    
+                    <div class="controls-section">
+                        <div class="controls-section-title">Parameters</div>
+                        <button id="start">▶️ Start Fall</button>
+                        <button id="reset">🔄 Reset</button>
+                        <div class="control">
+                            <label for="height">Height - displacement </label>
+                            <input type="range" id="height" min="50" max="350" value="100" step="15">
+                            <div class="value" id="heightVal">100</div>
                             
-                    </div>
-
-                        <div class="controls-section">
-                            <div class="controls-section-title">Parameters</div>
-                                <button id="start">▶️ Start Fall</button>
-                                <button id="reset">🔄 Reset</button>
-                            <div class="control">
-                                <label for="height">Height - displacement </label>
-                                <input type="range" id="height" min="50" max="350" value="100" step="15">
-                                <div class="value" id="heightVal">100</div>
-
-                            </div>
                         </div>
-
-                        <button id="reset">Reset</button>
-                        <button id="start">Start fall</button>
                     </div>
                 </div>
-            </section>
-    
-            
-            <!-- PRACTICE SECTION -->
-            <section id="practice" class="section">
-                <h2>Practice</h2>
-                <p>Your practice problems here</p>
-            </section>
-            
-            <!-- AI TUTOR SECTION -->
-            <section id="ai" class="section">
-                <h2>AI Tutor</h2>
-                <p>Chat layout</p>
-            </section>
-            
-            <!-- FORMULAS SECTION -->
-            <section id="formulas" class="section">
-                <h2>Formula Sheet!</h2>
-                <p>This is the general Physics Formula sheet, following the SPH3U/4U curriculum</p>
-                <div class="formulas-content">
-                    <img src="assets/Physics formula sheet.png" alt="Physics Formula sheet">
-                </div>
-            </section>
-            
-        </main>
+            </div>
+        </section>
         
-    </div>
-    <script src="navigation.js"></script>
-    <script src="freefalling-sim.js"></script>
+        
+        <!-- PRACTICE SECTION -->
+        <section id="practice" class="section">
+            <h2>Practice</h2>
+            <p>Your practice problems here</p>
+        </section>
+        
+        <!-- AI TUTOR SECTION -->
+        <section id="ai" class="section">
+            <h2>AI Tutor</h2>
+            <p>Chat layout</p>
+        </section>
+        
+        <!-- FORMULAS SECTION -->
+        <section id="formulas" class="section">
+            <h2>Formula Sheet!</h2>
+            <p>This is the general Physics Formula sheet, following the SPH3U/4U curriculum</p>
+            <div class="formulas-content">
+                <img src="assets/Physics formula sheet.png" alt="Physics Formula sheet">
+            </div>
+        </section>
+        
+    </main>
+    
+</div>
+<script src="navigation.js"></script>
+<script src="freefalling-sim.js"></script>
 </body>
 </html>

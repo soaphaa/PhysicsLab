@@ -55,3 +55,10 @@ function navigateTo(sectionId){
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigationListeners();
 });
+
+window.addEventListener('load', function() {
+    const hash = window.location.hash.slice(1);
+    if(hash){
+        navigateTo(hash);
+    }
+});

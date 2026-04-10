@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - Physics Lab</title>
+    <link rel="stylesheet" href="stylenew.css">
+    <link rel="stylesheet" href="lessons.css">
+</head>
+
+<body>
+    <!-- Top Navigation Bar-->
+    <nav class="top-nav">
+        <div class="nav-brand">Physics<span style="color: #0061f3;">Lab</span></div>
+        
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="lessons.html" class="nav-link active">Lessons</a></li>
+            <li><a href="index.html#simulation" class="nav-link">Simulation</a></li>
+            <li><a href="index.html#practice" class="nav-link">Practice</a></li>
+            <li><a href="index.html#ai" class="nav-link">AI Tutor</a></li>
+            <li><a href="index.html#formulas" class="nav-link">Formula Sheet</a></li>
+        </ul>
+    </nav>
+    
+    <div class="main-container">
+        
+        <!-- Left sidebar containing all the physics units MINIMIZABLE!-->
+        <aside class="sidebar">
+            
+            <button class="minimize-btn" id="minimize-btn" title="Minimize sidebar">
+                ☰
+            </button>
+            
+            <div class="sidebar-header">Topics</div>
+            <ul class="unit-list">
+                <li class="unit-item active" data-unit="projectile">
+                    <span class="unit-name">Projectile Motion</span>
+                </li>
+                
+                <li class="unit-item disabled" data-unit="forces">
+                    <span class="unit-name">Motion & Forces</span>
+                    <span class="coming-soon">Coming Soon</span>
+                </li>
+                <li class="unit-item disabled" data-unit="waves">
+                    <span class="unit-name">Sound & Waves</span>
+                    <span class="coming-soon">Coming Soon</span>
+                </li>
+                <li class="unit-item disabled" data-unit="electromagnetism">
+                    <span class="unit-name">Electromagnetism</span>
+                    <span class="coming-soon">Coming Soon</span>
+                </li>
+                <li class="unit-item disabled" data-unit="circuits-and-electricity">
+                    <span class="unit-name">Circuits & Electricity</span>
+                    <span class="coming-soon">Coming Soon</span>
+                </li>
+                <li class="unit-item disabled" data-unit="energy">
+                    <span class="unit-name">Energy & Work</span>
+                    <span class="coming-soon">Coming Soon</span>
+                </li>
+            </ul>
+        </aside>
+        
+        <main class="homepage">
+            
+            <section id="lessons" class="section active">
+                <div class="lessons-header">
+                    <div class="lessons-badge">
+                        <span>YOUR STUDY PLAN</span>
+                    </div>
+                </div>
+                
+                <!--Topic Filter-->
+                <div class="filters">
+                    
+                    <button class="filter-btn active" onclick="filterTopic('all')">All</button>
+                    <button class="filter-btn" onclick="filterTopic('kinematics')">Kinematics</button>
+                    <button class="filter-btn" onclick="filterTopic('mechanics')">Mechanics</button>
+                    <button class="filter-btn" onclick="filterTopic('waves')">Waves</button>
+                    <button class="filter-btn" onclick="filterTopic('modern')">Modern Physics</button>
+                    
+                </div>
+                
+                <div class="lessons-container">
+                    <div class="center-line"></div>
+                    
+                    <div class="lessons-path">
+                        <!--NODE 1 LESSON 1-->
+                        <div class="lesson-item left-offset">
+                            <div class="lesson-node active">
+                                <div class="node-orbital"></div>
+                                <button class="play-btn" style="background-image: url('assets/play-icon.png')"></button>
+                            </div>
+                        </div>
+                        <div class="lesson-info">
+                            <h3>Newton's first law</h3>
+                            <p> Objects in motion stay in motion bla bla bla</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Node 2 - Locked -->
+                    <div class="lesson-item right-offset">
+                        <div class="lesson-node locked">
+                            <div class="node-circle"></div>
+                            <button class="locked-btn" style="background-image: url('assets/locked-icon.png')"></button>
+                        </div>
+                        <div class="lesson-info">
+                            <h3>Newton's Second Law</h3>
+                            <p>Force equals mass times acceleration</p>
+                        </div>
+                    </div>
+
+                    <!-- Node 3 - Locked -->
+                    <div class="lesson-item right-offset">
+                        <div class="lesson-node locked">
+                            <div class="node-circle"></div>
+                            <button class="locked-btn" style="background-image: url('assets/locked-icon.png')"></button>
+                        </div>
+                        <div class="lesson-info">
+                            <h3>Newton's Third Law</h3>
+                            <p>Every action has its equal but opposite reaction</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+            
+            <!-- LESSON PATHWAY
+            <section id="lessons" class="section active">
+                <h2>Lessons - Projectile Motion</h2>
+                <div class="lesson-pathway">
+                    <div class="lesson-node completed">
+                        <div class="node-circle">✅</div>
+                        <h3>Introduction</h3>
+                        <p>Learn the basics!</p>
+                        <button class="btn btn-primary" onclick="navigateTo('lesson-intro')">Start</button>
+                    </div>
+                    <div class="lesson-node completed">
+                        <div class="node-circle">✓</div>
+                        <h3>Components</h3>
+                        <p>Horizontal & Vertical</p>
+                        <button class="btn btn-primary" onclick="navigateTo('lesson-components')">Start</button>
+                    </div>
+                    
+                    <div class="lesson-node locked">
+                        <div class="node-circle">🔒</div>
+                        <h3>Time of Flight</h3>
+                        <p>Calculate duration</p>
+                        <button class="btn btn-primary" disabled>Locked</button>
+                    </div>
+                </div>
+            </section> -->
+            
+            <!--LESSON PAGE individual-->
+            <section id="lesson-intro" class="section">
+                <h2>Intro to Projectile Motion</h2>
+                <div class="lesson-content">
+                    <p>Insert paragraphs lessons blabla</p>
+                    <div class="lesson-buttons">
+                        <button class="'btn btn-primary" onclick="navigateTo('lessons')">Return to Lesson</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('lesson-components')">Next Lesson →</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- LESSON COMPONENTS -->
+            <section id="lesson-components" class="section">
+                <h2>Components - Horizontal & Vertical</h2>
+                <div class="lesson-content">
+                    <p>Insert lessons blabla</p>
+                    <div class="lesson-buttons">
+                        <button class="btn btn-primary" onclick="navigateTo('lessons')">Return to Lessons</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('lesson-intro')">Previous Lesson</button>
+                        
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+    
+    <script src="navigation.js"></script>
+</body>
+</html>
