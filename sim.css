@@ -1,18 +1,25 @@
-/* Main simulation panel container */
+/* ============================================
+   SIMULATION PANEL & CANVAS STYLING
+   ============================================ */
+
 .sim-panel {
     display: flex;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 30px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Canvas container - where the animation happens */
 .canvas-box {
-    flex: 1;
+    flex: 2;
     background: #2b5b9b;
     border-radius: 8px;
     overflow: hidden;
     min-width: 500px;
-    height: 400px;
+    height: 450px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -21,48 +28,288 @@ canvas {
     display: block;
     width: 100%;
     height: 100%;
-    background: #2b5b9b;
 }
 
-/* Controls panel on the right side */
+/* ============================================
+   CONTROLS PANEL - Right side with inputs
+   ============================================ */
+
 .controls {
-    width: 200px;
-    background: #f9f9f9;
-    padding: 20px;
+    flex: 1;
+    background: #1a2a4a;
+    padding: 30px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0, 102, 204, 0.2);
     height: fit-content;
 }
 
-/* Each individual control (slider + label + value) */
-.control {
+.controls-header {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
     margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(0, 204, 255, 0.2);
+    padding-bottom: 12px;
 }
 
-/* Labels for the inputs */
-label {
+.sim-info {
+    background: transparent;
+    padding: 12px 0;
+    font-size: 13px;
+    color: #a0a0a0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.controls-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 10px;
+}
+
+/* ============================================
+   INDIVIDUAL CONTROL GROUPS
+   ============================================ */
+
+.control {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #333;
+    font-weight: 600;
+    font-size: 13px;
+    color: #e0e0e0;
+    text-transform: capitalize;
 }
 
 /* Range sliders styling */
 input[type="range"] {
     width: 100%;
-    margin-bottom: 5px;
+    height: 4px;
+    border-radius: 2px;
+    background: #3a5a8a;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
+}
+
+/* Chrome/Safari slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0066cc;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #0099ff;
+}
+
+/* Firefox slider thumb */
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0066cc;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #0099ff;
 }
 
 /* Value display boxes */
 .value {
-    background: white;
-    padding: 8px;
-    border-radius: 4px;
-    text-align: center;
-    font-weight: bold;
-    color: #0066cc;
-    border: 1px solid #0066cc;
-    font-size: 14px;
+    background: transparent;
+    padding: 6px 0;
+    border-radius: 0;
+    text-align: left;
+    font-weight: 600;
+    color: #00ccff;
+    border: none;
+    font-size: 13px;
+}
+
+/* ============================================
+   BUTTONS IN SIMULATION
+   ============================================ */
+
+.controls button {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 100%;
+    margin-top: 0;
+}
+
+.controls button:first-of-type {
+    background: #0066cc;
+    color: white;
+}
+
+.controls button:first-of-type:hover {
+    background: #0080ff;
+}
+
+.controls button:last-of-type {
+    background: transparent;
+    color: #00ccff;
+    border: 1px solid rgba(0, 204, 255, 0.5);
+}
+
+.controls button:last-of-type:hover {
+    background: rgba(0, 204, 255, 0.1);
+    border-color: rgba(0, 204, 255, 0.8);
+}
+
+/* ============================================
+   TOGGLE CHECKBOXES FOR STATS DISPLAY
+   ============================================ */
+
+.stat-toggles {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin-top: 20px;
+}
+
+.stat-toggles-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 12px;
+    color: #b0b0b0;
+}
+
+/* Checkbox styling */
+.toggle-group input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: #00ccff;
+}
+
+.toggle-group label {
+    cursor: pointer;
+    font-size: 12px;
+    color: #b0b0b0;
+    margin: 0;
+    font-weight: 500;
+}
+
+.toggle-group input[type="checkbox"]:hover + label {
+    color: #00ccff;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .sim-panel {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .canvas-box {
+        min-width: 100%;
+        height: 350px;
+    }
+
+    .controls {
+        flex: 1;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sim-panel {
+        padding: 0 20px;
+    }
+
+    .canvas-box {
+        min-width: 100%;
+        height: 280px;
+    }
+
+    .controls {
+        padding: 20px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        width: 16px;
+        height: 16px;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sim-panel {
+        padding: 0 10px;
+    }
+
+    .canvas-box {
+        height: 220px;
+        min-width: 100%;
+    }
+
+    .controls {
+        padding: 16px;
+    }
+
+    .controls button {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .toggle-group {
+        font-size: 11px;
+    }
+
+    .stat-toggles {
+        padding: 12px;
+    }
 }

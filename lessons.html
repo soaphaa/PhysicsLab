@@ -9,35 +9,25 @@
 </head>
 
 <body>
-    <!-- Top Navigation Bar-->
     <nav class="top-nav">
         <div class="nav-brand">Physics<span style="color: #0061f3;">Lab</span></div>
-        
         <ul class="nav-menu">
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="lessons.html" class="nav-link active">Lessons</a></li>
             <li><a href="index.html#simulation" class="nav-link">Simulation</a></li>
             <li><a href="index.html#practice" class="nav-link">Practice</a></li>
-            <li><a href="index.html#ai" class="nav-link">AI Tutor</a></li>
             <li><a href="index.html#formulas" class="nav-link">Formula Sheet</a></li>
         </ul>
     </nav>
     
     <div class="main-container">
-        
-        <!-- Left sidebar containing all the physics units MINIMIZABLE!-->
         <aside class="sidebar">
-            
-            <button class="minimize-btn" id="minimize-btn" title="Minimize sidebar">
-                ☰
-            </button>
-            
-            <div class="sidebar-header">Topics</div>
+            <button class="minimize-btn" id="minimize-btn">☰</button>
+            <div class="sidebar-header">Unit: Kinematics</div>
             <ul class="unit-list">
                 <li class="unit-item active" data-unit="projectile">
                     <span class="unit-name">Projectile Motion</span>
                 </li>
-                
                 <li class="unit-item disabled" data-unit="forces">
                     <span class="unit-name">Motion & Forces</span>
                     <span class="coming-soon">Coming Soon</span>
@@ -50,7 +40,7 @@
                     <span class="unit-name">Electromagnetism</span>
                     <span class="coming-soon">Coming Soon</span>
                 </li>
-                <li class="unit-item disabled" data-unit="circuits-and-electricity">
+                <li class="unit-item disabled" data-unit="circuits">
                     <span class="unit-name">Circuits & Electricity</span>
                     <span class="coming-soon">Coming Soon</span>
                 </li>
@@ -63,124 +53,317 @@
         
         <main class="homepage">
             
-            <section id="lessons" class="section active">
+            <!-- LESSONS PATHWAY HOME -->
+            <section id="lessons-home" class="section active">
                 <div class="lessons-header">
-                    <div class="lessons-badge">
-                        <span>YOUR STUDY PLAN</span>
-                    </div>
+                    <h2>Projectile Motion & Kinematics</h2>
+                    <p>SPH3U/4U Curriculum - Learn through interactive lessons</p>
                 </div>
-                
-                <!--Topic Filter-->
-                <div class="filters">
-                    
-                    <button class="filter-btn active" onclick="filterTopic('all')">All</button>
-                    <button class="filter-btn" onclick="filterTopic('kinematics')">Kinematics</button>
-                    <button class="filter-btn" onclick="filterTopic('mechanics')">Mechanics</button>
-                    <button class="filter-btn" onclick="filterTopic('waves')">Waves</button>
-                    <button class="filter-btn" onclick="filterTopic('modern')">Modern Physics</button>
-                    
-                </div>
-                
+
                 <div class="lessons-container">
                     <div class="center-line"></div>
-                    
                     <div class="lessons-path">
-                        <!--NODE 1 LESSON 1-->
+                        <!-- LESSON 1 -->
                         <div class="lesson-item left-offset">
                             <div class="lesson-node active">
                                 <div class="node-orbital"></div>
-                                <button class="play-btn" style="background-image: url('assets/play-icon.png')"></button>
+                                <button class="play-btn" onclick="navigateTo('lesson-1')">▶</button>
+                            </div>
+                            <div class="lesson-info">
+                                <h3>Free Fall</h3>
+                                <p>Objects falling under gravity alone</p>
+                                <span class="lesson-status">Start here</span>
                             </div>
                         </div>
-                        <div class="lesson-info">
-                            <h3>Newton's first law</h3>
-                            <p> Objects in motion stay in motion bla bla bla</p>
-                        </div>
-                    </div>
-                    
-                    
-                    <!-- Node 2 - Locked -->
-                    <div class="lesson-item right-offset">
-                        <div class="lesson-node locked">
-                            <div class="node-circle"></div>
-                            <button class="locked-btn" style="background-image: url('assets/locked-icon.png')"></button>
-                        </div>
-                        <div class="lesson-info">
-                            <h3>Newton's Second Law</h3>
-                            <p>Force equals mass times acceleration</p>
-                        </div>
-                    </div>
 
-                    <!-- Node 3 - Locked -->
-                    <div class="lesson-item right-offset">
-                        <div class="lesson-node locked">
-                            <div class="node-circle"></div>
-                            <button class="locked-btn" style="background-image: url('assets/locked-icon.png')"></button>
+                        <!-- LESSON 2 -->
+                        <div class="lesson-item right-offset">
+                            <div class="lesson-node active">
+                                <div class="node-orbital"></div>
+                                <button class="play-btn" onclick="navigateTo('lesson-2')">▶</button>
+                            </div>
+                            <div class="lesson-info">
+                                <h3>Throwing Up</h3>
+                                <p>Initial velocity against gravity</p>
+                                <span class="lesson-status">Available</span>
+                            </div>
                         </div>
-                        <div class="lesson-info">
-                            <h3>Newton's Third Law</h3>
-                            <p>Every action has its equal but opposite reaction</p>
+
+                        <!-- LESSON 3 -->
+                        <div class="lesson-item left-offset">
+                            <div class="lesson-node active">
+                                <div class="node-orbital"></div>
+                                <button class="play-btn" onclick="navigateTo('lesson-3')">▶</button>
+                            </div>
+                            <div class="lesson-info">
+                                <h3>Acceleration</h3>
+                                <p>Constant acceleration motion</p>
+                                <span class="lesson-status">Available</span>
+                            </div>
+                        </div>
+
+                        <!-- LESSON 4 -->
+                        <div class="lesson-item right-offset">
+                            <div class="lesson-node active">
+                                <div class="node-orbital"></div>
+                                <button class="play-btn" onclick="navigateTo('lesson-4')">▶</button>
+                            </div>
+                            <div class="lesson-info">
+                                <h3>Deceleration</h3>
+                                <p>Slowing down with constant deceleration</p>
+                                <span class="lesson-status">Available</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
             </section>
-            
-            <!-- LESSON PATHWAY
-            <section id="lessons" class="section active">
-                <h2>Lessons - Projectile Motion</h2>
-                <div class="lesson-pathway">
-                    <div class="lesson-node completed">
-                        <div class="node-circle">✅</div>
-                        <h3>Introduction</h3>
-                        <p>Learn the basics!</p>
-                        <button class="btn btn-primary" onclick="navigateTo('lesson-intro')">Start</button>
-                    </div>
-                    <div class="lesson-node completed">
-                        <div class="node-circle">✓</div>
-                        <h3>Components</h3>
-                        <p>Horizontal & Vertical</p>
-                        <button class="btn btn-primary" onclick="navigateTo('lesson-components')">Start</button>
-                    </div>
+
+            <!-- LESSON 1: FREE FALL -->
+            <section id="lesson-1" class="section lesson-page">
+                <div class="lesson-content-container">
+                    <button class="back-btn" onclick="navigateTo('lessons-home')">← Back to Lessons</button>
+                    <h2>Free Fall: Understanding Gravity</h2>
                     
-                    <div class="lesson-node locked">
-                        <div class="node-circle">🔒</div>
-                        <h3>Time of Flight</h3>
-                        <p>Calculate duration</p>
-                        <button class="btn btn-primary" disabled>Locked</button>
-                    </div>
-                </div>
-            </section> -->
-            
-            <!--LESSON PAGE individual-->
-            <section id="lesson-intro" class="section">
-                <h2>Intro to Projectile Motion</h2>
-                <div class="lesson-content">
-                    <p>Insert paragraphs lessons blabla</p>
-                    <div class="lesson-buttons">
-                        <button class="'btn btn-primary" onclick="navigateTo('lessons')">Return to Lesson</button>
-                        <button class="btn btn-secondary" onclick="navigateTo('lesson-components')">Next Lesson →</button>
+                    <div class="lesson-body">
+                        <div class="lesson-section">
+                            <h3>What happens when you drop something?</h3>
+                            <p>When an object falls freely under gravity (no air resistance), it accelerates downward at a constant rate. On Earth, this acceleration is always <strong>9.81 m/s²</strong>.</p>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Key Equations</h3>
+                            <div class="formula-card">
+                                <code>d = 0.5 × g × t²</code>
+                                <p>Distance fallen</p>
+                            </div>
+                            <div class="formula-card">
+                                <code>v = g × t</code>
+                                <p>Velocity after time t</p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Try it yourself</h3>
+                            <p>Adjust the height and watch how long it takes to fall:</p>
+                            <div class="mini-sim">
+                                <canvas id="sim-drop-1" width="400" height="300"></canvas>
+                                <div class="sim-controls">
+                                    <div class="control-row">
+                                        <label>Height (m): <input type="range" id="height-drop-1" min="10" max="100" value="50" step="5" onchange="updateDropSim1()"> <span id="height-display-1">50</span></label>
+                                    </div>
+                                    <div class="control-row">
+                                        <button onclick="dropStart1()">Start</button>
+                                        <button onclick="dropReset1()">Reset</button>
+                                    </div>
+                                    <div class="sim-stats">
+                                        <div>Time: <strong id="time-1">0.0</strong>s</div>
+                                        <div>Velocity: <strong id="vel-1">0.0</strong> m/s</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Real-world example</h3>
+                            <p>A ball dropped from a 100-meter building takes about 4.5 seconds to hit the ground and reaches a velocity of about 44 m/s (158 km/h)!</p>
+                        </div>
+
+                        <div class="lesson-footer">
+                            <button class="btn btn-secondary" onclick="navigateTo('lessons-home')">Back</button>
+                            <button class="btn btn-primary" onclick="navigateTo('lesson-2')">Next: Throwing Up</button>
+                        </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- LESSON COMPONENTS -->
-            <section id="lesson-components" class="section">
-                <h2>Components - Horizontal & Vertical</h2>
-                <div class="lesson-content">
-                    <p>Insert lessons blabla</p>
-                    <div class="lesson-buttons">
-                        <button class="btn btn-primary" onclick="navigateTo('lessons')">Return to Lessons</button>
-                        <button class="btn btn-secondary" onclick="navigateTo('lesson-intro')">Previous Lesson</button>
-                        
+
+            <!-- LESSON 2: THROWING UP -->
+            <section id="lesson-2" class="section lesson-page">
+                <div class="lesson-content-container">
+                    <button class="back-btn" onclick="navigateTo('lessons-home')">← Back to Lessons</button>
+                    <h2>Throwing Up: Velocity Against Gravity</h2>
+                    
+                    <div class="lesson-body">
+                        <div class="lesson-section">
+                            <h3>What if you throw it upward?</h3>
+                            <p>When you throw an object upward with initial velocity, gravity still pulls it down. The object slows down, stops at the peak, then falls back down with increasing speed.</p>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Key Equations</h3>
+                            <div class="formula-card">
+                                <code>v = v₀ - g × t</code>
+                                <p>Velocity at time t (upward positive)</p>
+                            </div>
+                            <div class="formula-card">
+                                <code>h_max = v₀² / (2g)</code>
+                                <p>Maximum height reached</p>
+                            </div>
+                            <div class="formula-card">
+                                <code>t_total = 2 × v₀ / g</code>
+                                <p>Total time in air</p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Try it yourself</h3>
+                            <p>Change the initial velocity and see how high it goes:</p>
+                            <div class="mini-sim">
+                                <canvas id="sim-throw-2" width="400" height="300"></canvas>
+                                <div class="sim-controls">
+                                    <div class="control-row">
+                                        <label>Initial Velocity (m/s): <input type="range" id="velocity-throw-2" min="5" max="40" value="20" step="2" onchange="updateThrowSim2()"> <span id="velocity-display-2">20</span></label>
+                                    </div>
+                                    <div class="control-row">
+                                        <button onclick="throwStart2()">Launch</button>
+                                        <button onclick="throwReset2()">Reset</button>
+                                    </div>
+                                    <div class="sim-stats">
+                                        <div>Time: <strong id="time-2">0.0</strong>s</div>
+                                        <div>Height: <strong id="height-2">0.0</strong>m</div>
+                                        <div>Max Height: <strong id="max-height-2">0.0</strong>m</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Key insight</h3>
+                            <p>Time to reach max height = Time to fall back down. This is because gravity acts equally in both directions!</p>
+                        </div>
+
+                        <div class="lesson-footer">
+                            <button class="btn btn-secondary" onclick="navigateTo('lesson-1')">Previous</button>
+                            <button class="btn btn-primary" onclick="navigateTo('lesson-3')">Next: Acceleration</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON 3: ACCELERATION -->
+            <section id="lesson-3" class="section lesson-page">
+                <div class="lesson-content-container">
+                    <button class="back-btn" onclick="navigateTo('lessons-home')">← Back to Lessons</button>
+                    <h2>Constant Acceleration: Speeding Up</h2>
+                    
+                    <div class="lesson-body">
+                        <div class="lesson-section">
+                            <h3>What is acceleration?</h3>
+                            <p>Acceleration is the rate of change of velocity. When a car speeds up from 0 to 100 km/h, it's accelerating. Constant acceleration means it speeds up at the same rate every second.</p>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Key Equations</h3>
+                            <div class="formula-card">
+                                <code>v = v₀ + a × t</code>
+                                <p>Final velocity</p>
+                            </div>
+                            <div class="formula-card">
+                                <code>d = v₀t + 0.5 × a × t²</code>
+                                <p>Distance traveled (starting from rest: d = 0.5 × a × t²)</p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Try it yourself</h3>
+                            <p>Watch the car accelerate at different rates:</p>
+                            <div class="mini-sim">
+                                <canvas id="sim-accel-3" width="400" height="250"></canvas>
+                                <div class="sim-controls">
+                                    <div class="control-row">
+                                        <label>Acceleration (m/s²): <input type="range" id="accel-accel-3" min="1" max="8" value="3" step="0.5" onchange="updateAccelSim3()"> <span id="accel-display-3">3</span></label>
+                                    </div>
+                                    <div class="control-row">
+                                        <button onclick="accelStart3()">Start</button>
+                                        <button onclick="accelReset3()">Reset</button>
+                                    </div>
+                                    <div class="sim-stats">
+                                        <div>Time: <strong id="time-3">0.0</strong>s</div>
+                                        <div>Velocity: <strong id="vel-3">0.0</strong> m/s</div>
+                                        <div>Distance: <strong id="dist-3">0.0</strong>m</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Real-world context</h3>
+                            <p>A car with 5 m/s² acceleration goes from 0 to 60 km/h in 3.3 seconds. Faster accelerations mean quicker speed-ups!</p>
+                        </div>
+
+                        <div class="lesson-footer">
+                            <button class="btn btn-secondary" onclick="navigateTo('lesson-2')">Previous</button>
+                            <button class="btn btn-primary" onclick="navigateTo('lesson-4')">Next: Deceleration</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON 4: DECELERATION -->
+            <section id="lesson-4" class="section lesson-page">
+                <div class="lesson-content-container">
+                    <button class="back-btn" onclick="navigateTo('lessons-home')">← Back to Lessons</button>
+                    <h2>Deceleration: Slowing Down</h2>
+                    
+                    <div class="lesson-body">
+                        <div class="lesson-section">
+                            <h3>What happens when you brake?</h3>
+                            <p>Deceleration is negative acceleration — velocity decreases over time. When a car brakes, it's decelerating. The faster you're going, the longer it takes to stop at the same deceleration.</p>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Key Equations</h3>
+                            <div class="formula-card">
+                                <code>v = v₀ - a × t</code>
+                                <p>Velocity when decelerating</p>
+                            </div>
+                            <div class="formula-card">
+                                <code>d = v₀² / (2a)</code>
+                                <p>Stopping distance (when v = 0)</p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Try it yourself</h3>
+                            <p>Change initial speed and deceleration to see stopping distance:</p>
+                            <div class="mini-sim">
+                                <canvas id="sim-brake-4" width="400" height="250"></canvas>
+                                <div class="sim-controls">
+                                    <div class="control-row">
+                                        <label>Initial Speed (m/s): <input type="range" id="speed-brake-4" min="10" max="50" value="30" step="2" onchange="updateBrakeSim4()"> <span id="speed-display-4">30</span></label>
+                                    </div>
+                                    <div class="control-row">
+                                        <label>Deceleration (m/s²): <input type="range" id="decel-brake-4" min="2" max="10" value="5" step="0.5" onchange="updateBrakeSim4()"> <span id="decel-display-4">5</span></label>
+                                    </div>
+                                    <div class="control-row">
+                                        <button onclick="brakeStart4()">Start Braking</button>
+                                        <button onclick="brakeReset4()">Reset</button>
+                                    </div>
+                                    <div class="sim-stats">
+                                        <div>Time: <strong id="time-4">0.0</strong>s</div>
+                                        <div>Velocity: <strong id="vel-4">0.0</strong> m/s</div>
+                                        <div>Stopping Distance: <strong id="stop-dist-4">0.0</strong>m</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <h3>Safety lesson</h3>
+                            <p>At 30 m/s (108 km/h) with 5 m/s² braking, you need 90 meters to stop. Double the speed → 4× the stopping distance!</p>
+                        </div>
+
+                        <div class="lesson-footer">
+                            <button class="btn btn-secondary" onclick="navigateTo('lesson-3')">Previous</button>
+                            <button class="btn btn-primary" onclick="navigateTo('lessons-home')">Back to Lessons</button>
+                        </div>
                     </div>
                 </div>
             </section>
             
         </main>
-        
     </div>
     
     <script src="navigation.js"></script>
+    <script src="lesson-simulations.js"></script>
 </body>
 </html>
