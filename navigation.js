@@ -30,25 +30,42 @@ function navigateTo(sectionId){
         section.classList.remove('active');
     });
 
-    //show section
+    // show section
     const targetSection = document.getElementById(sectionId);
     if(targetSection){
         targetSection.classList.add('active');
     }
 
-    //ensures my code in freefalling-sim.js WORKS! AND DOESNT INTERFEERE (PLEASEEEEEEEEE I NEED THIS)
+    // UPDATE ACTIVE NAV LINK
+    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    let navLinkText = '';
+    if(sectionId === 'home') navLinkText = 'Home';
+    else if(sectionId === 'simulation') navLinkText = 'Simulation';
+    else if(sectionId === 'practice') navLinkText = 'Practice';
+    else if(sectionId === 'formulas') navLinkText = 'Formula Sheet';
+    
+    if(navLinkText) {
+        navLinks.forEach(link => {
+            if(link.textContent === navLinkText) {
+                link.classList.add('active');
+            }
+        });
+    }
 
-    if(sectionId === 'sim-dropping'){
-        // Wait a tiny bit for the section to become visible, then resize canvas
+    // RESIZE CANVAS FOR ALL SIM SECTIONS
+    if(sectionId === 'sim-dropping' || sectionId === 'sim-throwing' || sectionId === 'sim-speeding' || sectionId === 'sim-braking'){
         setTimeout(() => {
             const canvas = document.getElementById('canvas');
             if(canvas){
-                // Recalculate canvas size based on its now-visible parent
                 canvas.width = canvas.parentElement.offsetWidth;
                 canvas.height = canvas.parentElement.offsetHeight;
                 console.log('Canvas restarted at:', canvas.width, 'x', canvas.height);
             }
-        }, 100);  // 100ms delay
+        }, 100);
     }
 }
 

@@ -92,8 +92,6 @@ function draw(){
     ctx.fillStyle = '#2b5b9b';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 3;
     ctx.beginPath();
     const groundLevel = canvas.height - ball.radius;
     ctx.moveTo(0, groundLevel);
@@ -105,8 +103,6 @@ function draw(){
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
     ctx.fill();
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-    ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(ball.x, ball.y);
     ctx.lineTo(ball.x, ball.y + ball.vy*2);
