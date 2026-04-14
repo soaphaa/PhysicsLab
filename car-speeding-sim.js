@@ -1,240 +1,189 @@
-// DEBUG: Check if script is loading
 console.log('car-speeding-sim.js loaded!');
 
-(function() {
-
-// DEBUG: Check if canvas exists
-const canvas = document.getElementById('canvas-speeding');
-console.log('Canvas element:', canvas);
-
-if (!canvas) {
-    console.error('❌ CANVAS NOT FOUND! Check your HTML id="canvas"');
-} else {
-    console.log('✅ Canvas found!');
-    console.log('Canvas size:', canvas.width, 'x', canvas.height);
-}
-
-canvas.width = canvas.parentElement.offsetWidth;
-canvas.height = canvas.parentElement.offsetHeight;
-
-const ctx = canvas.getContext('2d');
-console.log('Context:', ctx);
-
-//canvas will fit the size of the screen
-canvas.width = canvas.parentElement.offsetWidth;
-console.log('Canvas width set to:', canvas.width);
-
-//setting values
-let ball = {
-    x:0,
-    y:0,
-    vx:0,
-    vy:0,
-    radius:15, 
-    isMoving:false //initially doesnt move
-}
-
-let physics = {
-    gravity: 9.81,
-    pixelScale: 100,
-    startHeight: 100,
-    timeStep: 0.016
-};
-
-// ADDED: Stats tracking object
-let stats = {
-    vi: 0,  // Initial velocity (at start of fall)
-    vf: 0,  // Final velocity (when ball hits ground)
-    timeElapsed: 0,  // Time since ball started falling
-    distanceFallen: 0,  // Distance from start to current position
-    // ADDED: Toggles for what to display
-    showVi: true,
-    showVf: true,
-    showTime: true,
-    showDistance: true,
-    showHeight: true
-};
-
-function reset() {
-    ball.x = canvas.width / 2;
-    ball.y = physics.startHeight;
-    ball.vy = 0;
-    ball.isMoving = false;  // Ball stays still until Start is clicked
-    // ADDED: Reset stats when ball resets
-    stats.vi = 0;
-    stats.vf = 0;
-    stats.timeElapsed = 0;
-    stats.distanceFallen = 0;
-    console.log('Ball reset to:', ball.x, ball.y);
-}
-
-function updatePhysics(){
-    if(!ball.isMoving) return;
-
-    const gravityPixelsPerFrame = (physics.gravity * physics.pixelScale) / (60 * 60);
-    ball.vy += gravityPixelsPerFrame;
-    ball.y += ball.vy;
+function initSimSpeeding() {
+    const canvas = document.getElementById('canvas-speeding');
+    if (!canvas) {
+        console.error('Canvas not found');
+        return;
+    }
     
-    // ADDED: Update stats as ball falls
-    const velocityMS = (ball.vy / physics.pixelScale) * 60;
-    stats.vf = velocityMS;  // Update final velocity
-    stats.timeElapsed += (1/60);  // Increment time by 1 frame
-    stats.distanceFallen = (ball.y - physics.startHeight) / physics.pixelScale;
-    
-    const groundLevel = canvas.height - ball.radius;
-    if (ball.y >= groundLevel){
-        ball.y = groundLevel;
-        ball.vy = 0;
-        ball.isMoving = false;
-    }
-    saveStats();
-}
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
 
-function draw(){
-    ctx.fillStyle = '#2b5b9b';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const roadY = canvas.height / 2;
 
-    ctx.beginPath();
-    const groundLevel = canvas.height - ball.radius;
-    ctx.moveTo(0, groundLevel);
-    ctx.lineTo(canvas.width, groundLevel);
-    ctx.stroke();
-
-    ctx.fillStyle = '#ff6b6b';
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(ball.x, ball.y);
-    ctx.lineTo(ball.x, ball.y + ball.vy*2);
-    ctx.stroke();
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '14px Arial';
-
-    // ADDED: Dynamic stats display based on toggles
-    let yPosition = 30;
-
-    if (stats.showVi) {
-        ctx.fillText(`Vi (Initial Velocity): ${stats.vi.toFixed(2)} m/s`, 20, yPosition);
-        yPosition += 25;
+    let car = {
+        x: 20,
+        vx: 0,
+        isMoving: false
     }
 
-    if (stats.showVf) {
-        const velocityMS = (ball.vy / physics.pixelScale) * 60;
-        ctx.fillText(`Vf (Final Velocity): ${velocityMS.toFixed(2)} m/s`, 20, yPosition);
-        yPosition += 25;
+    let physics = {
+        accelValue: 0
+    };
+
+    let stats = {
+        vi: 0,
+        vf: 0,
+        acceleration: 0,
+        timeElapsed: 0,
+        distance: 0,
+        showVi: true,
+        showVf: true,
+        showAccel: true,
+        showTime: true,
+        showDistance: true
+    };
+
+    function reset() {
+        car.x = 20;
+        car.vx = 0;
+        car.isMoving = false;
+        stats.vi = 0;
+        stats.vf = 0;
+        stats.acceleration = 0;
+        stats.timeElapsed = 0;
+        stats.distance = 0;
     }
 
-    if (stats.showTime) {
-        ctx.fillText(`Time: ${stats.timeElapsed.toFixed(2)} s`, 20, yPosition);
-        yPosition += 25;
+    function updatePhysics(){
+        if(!car.isMoving) return;
+
+        car.vx += (physics.accelValue / 60);
+        car.x += car.vx;
+        
+        stats.vf = car.vx;
+        stats.timeElapsed += (1/60);
+        stats.distance = car.x - 20;
+        
+        if (car.x > canvas.width - 80){
+            car.isMoving = false;
+        }
     }
 
-    if (stats.showDistance) {
-        ctx.fillText(`Distance Fallen: ${Math.max(0, stats.distanceFallen).toFixed(2)} m`, 20, yPosition);
-        yPosition += 25;
+    function draw(){
+        ctx.fillStyle = '#2b5b9b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = '#ffff00';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([20, 10]);
+        ctx.beginPath();
+        ctx.moveTo(0, roadY + 12);
+        ctx.lineTo(canvas.width, roadY + 12);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const carW = 50;
+        const carH = 25;
+        ctx.fillStyle = '#ff6b6b';
+        ctx.fillRect(car.x, roadY - carH / 2, carW, carH);
+        ctx.fillStyle = '#333';
+        ctx.fillRect(car.x + 8, roadY - 8, 8, 8);
+        ctx.fillRect(car.x + 32, roadY - 8, 8, 8);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '14px Arial';
+
+        let yPosition = 30;
+
+        if (stats.showVi) {
+            ctx.fillText(`Vi: ${stats.vi.toFixed(2)} m/s`, 20, yPosition);
+            yPosition += 25;
+        }
+
+        if (stats.showVf) {
+            ctx.fillText(`Vf: ${stats.vf.toFixed(2)} m/s`, 20, yPosition);
+            yPosition += 25;
+        }
+
+        if (stats.showAccel) {
+            ctx.fillText(`Acceleration: ${stats.acceleration.toFixed(2)} m/s²`, 20, yPosition);
+            yPosition += 25;
+        }
+
+        if (stats.showTime) {
+            ctx.fillText(`Time: ${stats.timeElapsed.toFixed(2)} s`, 20, yPosition);
+            yPosition += 25;
+        }
+
+        if (stats.showDistance) {
+            ctx.fillText(`Distance: ${stats.distance.toFixed(2)} m`, 20, yPosition);
+            yPosition += 25;
+        }
     }
 
-    if (stats.showHeight) {
-        const heightAboveGround = (groundLevel - ball.y) / physics.pixelScale;
-        ctx.fillText(`Height: ${Math.max(0, heightAboveGround).toFixed(2)} m`, 20, yPosition);
-        yPosition += 25;
+    function animate() {
+        updatePhysics();
+        draw();
+        requestAnimationFrame(animate);
     }
-}
 
-//actual animation
-function animate() {
-    updatePhysics();
-    draw();
-    requestAnimationFrame(animate);
-}
+    const accelInput = document.getElementById('acceleration');
+    const startBtn = document.getElementById('start');
+    const resetBtn = document.getElementById('reset');
+    const accelVal = document.getElementById('accelerationVal');
 
-const heightInput = document.getElementById('height');
-const startBtn = document.getElementById('start');
-const resetBtn = document.getElementById('reset');
+    const viToggle = document.getElementById('toggle-vi');
+    const vfToggle = document.getElementById('toggle-vf');
+    const accelToggle = document.getElementById('toggle-acceleration');
+    const timeToggle = document.getElementById('toggle-time');
+    const distanceToggle = document.getElementById('toggle-distance');
  
-const heightVal = document.getElementById('heightVal');
-
-// ADDED: Get toggle checkboxes
-const viToggle = document.getElementById('toggle-vi');
-const vfToggle = document.getElementById('toggle-vf');
-const timeToggle = document.getElementById('toggle-time');
-const distanceToggle = document.getElementById('toggle-distance');
-const heightToggle = document.getElementById('toggle-height');
- 
-// Height slider
-if (heightInput) {
-    heightInput.addEventListener('input', (e) => {
-        physics.startHeight = parseFloat(e.target.value);
-        heightVal.textContent = physics.startHeight;
-        reset();
-    });
-}
- 
-// Start button - begins the fall
-if (startBtn) {
-    startBtn.addEventListener('click', () => {
-        reset();
-        stats.vi = 0;  // Vi is always 0 for free fall
-        ball.isMoving = true;  // NOW the ball falls
-    });
-}
- 
-// Reset button - puts ball back at top
-if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-        reset();
-    });
-}
-
-// ADDED: Toggle event listeners
-if (viToggle) {
-    viToggle.addEventListener('change', (e) => {
-        stats.showVi = e.target.checked;
-    });
-}
-
-if (vfToggle) {
-    vfToggle.addEventListener('change', (e) => {
-        stats.showVf = e.target.checked;
-    });
-}
-
-if (timeToggle) {
-    timeToggle.addEventListener('change', (e) => {
-        stats.showTime = e.target.checked;
-    });
-}
-
-if (distanceToggle) {
-    distanceToggle.addEventListener('change', (e) => {
-        stats.showDistance = e.target.checked;
-    });
-}
-
-if (heightToggle) {
-    heightToggle.addEventListener('change', (e) => {
-        stats.showHeight = e.target.checked;
-    });
-}
- 
-reset();
-animate();
-
-function saveStats(){
-    localStorage.setItem('physicsLabStats', JSON.stringify(stats));
-
-}
-
-function loadStats(){
-    const saved=localStorage.getItem('physicsLabStats');
-    if(saved){
-        stats = JSON.parse(saved);
+    if (accelInput) {
+        accelInput.addEventListener('input', (e) => {
+            physics.accelValue = parseFloat(e.target.value);
+            accelVal.textContent = physics.accelValue;
+            reset();
+        });
     }
+ 
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            reset();
+            stats.vi = 0;
+            stats.acceleration = physics.accelValue;
+            car.isMoving = true;
+        });
+    }
+ 
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            reset();
+        });
+    }
+
+    if (viToggle) {
+        viToggle.addEventListener('change', (e) => {
+            stats.showVi = e.target.checked;
+        });
+    }
+
+    if (vfToggle) {
+        vfToggle.addEventListener('change', (e) => {
+            stats.showVf = e.target.checked;
+        });
+    }
+
+    if (accelToggle) {
+        accelToggle.addEventListener('change', (e) => {
+            stats.showAccel = e.target.checked;
+        });
+    }
+
+    if (timeToggle) {
+        timeToggle.addEventListener('change', (e) => {
+            stats.showTime = e.target.checked;
+        });
+    }
+
+    if (distanceToggle) {
+        distanceToggle.addEventListener('change', (e) => {
+            stats.showDistance = e.target.checked;
+        });
+    }
+ 
+    reset();
+    animate();
 }
-
-loadStats();
-
-})();

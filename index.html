@@ -11,7 +11,7 @@
 <body>
     <!-- Top Nagivation Bar-->
     <nav class="top-nav">
-        <div class="nav-brand">Physics<span style="color: #0061f3;">Lab</span></div>
+        <div class="nav-brand" onclick="navigateTo('home')"><img src="assets/logo-physicslab.png" alt="PhysicsLab"></div>
         
         <ul class="nav-menu">
             <li><a href="#" onclick="navigateTo('home')" class="nav-link active">Home</a></li>
@@ -35,7 +35,7 @@
             <div class="sidebar-header">Topics</div>
             <ul class="unit-list">
                 <li class="unit-item active" data-unit="projectile">
-                    <span class="unit-name">Projectile Motion</span>
+                    <a href="lessons.html" class="unit-name">Projectile Motion</a>
                 </li>
                 
                 <li class="unit-item disabled" data-unit="forces">
@@ -79,7 +79,7 @@
                 </div>
                 
                 <div class="features-grid">
-                    <div class="feature-card" onclick="navigateTo('lessons-home')">
+                    <div class="feature-card" onclick="window.location.href='lessons.html'">
                         <h3>Lessons</h3>
                         <p>Learn physics step by step in lessons</p>
                     </div>
@@ -105,37 +105,37 @@
                     <div class="simulation-grid">
                         <div class="simulations-card">
                             <div class="sim-image">
-                                <canvas id="preview-drop" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b);"></canvas>
+                                <img src="assets/dropping-preview.png" alt="Dropping an Object"><canvas id="preview-drop" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
                             </div>
                             <h4>Dropping an Object from Height</h4>
-                            <p>Understand how objects accelerate as they fall under gravity</p>
+                            <p>Understand how objects fall under gravity</p>
                             <button class="btn btn-primary" onclick="navigateTo('sim-dropping')">Launch</button>
                         </div>
                         
                         <div class="simulations-card">
                             <div class="sim-image">
-                                <canvas id="preview-throw" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b);"></canvas>
+                                <img src="assets/throwing-preview.png" alt="Throwing an Object"><canvas id="preview-throw" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
                             </div>
                             <h4>Throwing an Object Straight Up</h4>
-                            <p>Explore velocity changes as an object rises and falls back down</p>
+                            <p>Explore velocity and maximum height</p>
                             <button class="btn btn-primary" onclick="navigateTo('sim-throwing')">Launch</button>
                         </div>
                         
                         <div class="simulations-card">
                             <div class="sim-image">
-                                <canvas id="preview-speed" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b);"></canvas>
+                                <img src="assets/speeding-preview.png" alt="Car Speeding Up"><canvas id="preview-speed" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
                             </div>
                             <h4>A Car Speeding Up</h4>
-                            <p>See how acceleration affects velocity over time</p>
+                            <p>See how acceleration affects velocity</p>
                             <button class="btn btn-primary" onclick="navigateTo('sim-speeding')">Launch</button>
                         </div>
                         
                         <div class="simulations-card">
                             <div class="sim-image">
-                                <canvas id="preview-brake" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b);"></canvas>
+                                <img src="assets/braking-preview.png" alt="Car Braking"><canvas id="preview-brake" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
                             </div>
                             <h4>A Car Braking to a Stop</h4>
-                            <p>Understand negative acceleration and deceleration</p>
+                            <p>Understand deceleration and stopping distance</p>
                             <button class="btn btn-primary" onclick="navigateTo('sim-braking')">Launch</button>
                         </div>
                     </div>

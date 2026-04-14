@@ -3,7 +3,6 @@
 //top nav menu links
 const navLinks = document.querySelectorAll('.nav-link');
 
-
 //minimizing sidebar
 const minimizedBtn = document.getElementById('minimize-btn');
 const sidebarState ={isMinimized: false,};
@@ -34,6 +33,7 @@ function navigateTo(sectionId){
     const targetSection = document.getElementById(sectionId);
     if(targetSection){
         targetSection.classList.add('active');
+        window.scrollTo(0,0);
     }
 
     // UPDATE ACTIVE NAV LINK
@@ -71,6 +71,20 @@ function navigateTo(sectionId){
                 canvas.height = canvas.parentElement.offsetHeight;
                 console.log('Canvas restarted at:', canvas.width, 'x', canvas.height);
             }
+
+            // TRIGGER SIM INIT FUNCTIONS
+            if(sectionId === 'sim-dropping' && typeof initSimDropping === 'function') {
+                initSimDropping();
+            }
+            else if(sectionId === 'sim-throwing' && typeof initSimThrowing === 'function') {
+                initSimThrowing();
+            }
+            else if(sectionId === 'sim-speeding' && typeof initSimSpeeding === 'function') {
+                initSimSpeeding();
+            }
+            else if(sectionId === 'sim-braking' && typeof initSimBraking === 'function') {
+                initSimBraking();
+            }
         }, 100);
     }
 }
@@ -78,7 +92,7 @@ function navigateTo(sectionId){
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigationListeners();
 });
-
+ 
 window.addEventListener('load', function() {
     const hash = window.location.hash.slice(1);
     if(hash){
