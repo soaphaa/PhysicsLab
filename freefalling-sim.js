@@ -1,8 +1,10 @@
 // DEBUG: Check if script is loading
 console.log('freefalling-sim.js loaded!');
 
+(function() {
+
 // DEBUG: Check if canvas exists
-const canvas = document.getElementById('canvas');
+const canvas = document.getElementById('canvas-dropping');
 console.log('Canvas element:', canvas);
 
 if (!canvas) {
@@ -234,3 +236,5 @@ function loadStats(){
 }
 
 loadStats();
+
+})();

@@ -59,7 +59,13 @@ function navigateTo(sectionId){
     // RESIZE CANVAS FOR ALL SIM SECTIONS
     if(sectionId === 'sim-dropping' || sectionId === 'sim-throwing' || sectionId === 'sim-speeding' || sectionId === 'sim-braking'){
         setTimeout(() => {
-            const canvas = document.getElementById('canvas');
+            let canvasId = 'canvas';
+            if(sectionId === 'sim-dropping') canvasId = 'canvas-dropping';
+            else if(sectionId === 'sim-throwing') canvasId = 'canvas-throwing';
+            else if(sectionId === 'sim-speeding') canvasId = 'canvas-speeding';
+            else if(sectionId === 'sim-braking') canvasId = 'canvas-braking';
+            
+            const canvas = document.getElementById(canvasId);
             if(canvas){
                 canvas.width = canvas.parentElement.offsetWidth;
                 canvas.height = canvas.parentElement.offsetHeight;

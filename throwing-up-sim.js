@@ -1,8 +1,10 @@
 // DEBUG: Check if script is loading
 console.log('throwing-up-sim.js loaded!');
 
+(function() {
+
 // DEBUG: Check if canvas exists
-let canvas = document.getElementById('canvas');
+const canvas = document.getElementById('canvas-throwing');
 console.log('Canvas element:', canvas);
 
 if (!canvas) {
@@ -15,7 +17,7 @@ if (!canvas) {
 canvas.width = canvas.parentElement.offsetWidth;
 canvas.height = canvas.parentElement.offsetHeight;
 
-let ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
 console.log('Context:', ctx);
 
 //canvas will fit the size of the screen
@@ -234,3 +236,5 @@ function loadStats(){
 }
 
 loadStats();
+
+})();
