@@ -35,461 +35,460 @@
             <div class="sidebar-header">Topics</div>
             <ul class="unit-list">
                 <li class="unit-item active" data-unit="projectile">
-                    <span class="unit-name">Projectile Motion</span>
-                </li>
-                
-                <li class="unit-item disabled" data-unit="forces">
-                    <span class="unit-name">Motion & Forces</span>
-                    <span class="coming-soon">Coming Soon</span>
-                </li>
-                <li class="unit-item disabled" data-unit="waves">
-                    <span class="unit-name">Sound & Waves</span>
-                    <span class="coming-soon">Coming Soon</span>
-                </li>
-                <li class="unit-item disabled" data-unit="electromagnetism">
-                    <span class="unit-name">Electromagnetism</span>
-                    <span class="coming-soon">Coming Soon</span>
-                </li>
-                <li class="unit-item disabled" data-unit="circuits-and-electricity">
-                    <span class="unit-name">Circuits & Electricity</span>
-                    <span class="coming-soon">Coming Soon</span>
-                </li>
-                <li class="unit-item disabled" data-unit="energy">
-                    <span class="unit-name">Energy & Work</span>
-                    <span class="coming-soon">Coming Soon</span>
-                </li>
-            </ul>
-        </aside>
-        
-        
-        <main class="homepage">
+                    <a href="lessons.html" class="unit-name">Projectile Motion</a>                </li>
+                    
+                    <li class="unit-item disabled" data-unit="forces">
+                        <span class="unit-name">Motion & Forces</span>
+                        <span class="coming-soon">Coming Soon</span>
+                    </li>
+                    <li class="unit-item disabled" data-unit="waves">
+                        <span class="unit-name">Sound & Waves</span>
+                        <span class="coming-soon">Coming Soon</span>
+                    </li>
+                    <li class="unit-item disabled" data-unit="electromagnetism">
+                        <span class="unit-name">Electromagnetism</span>
+                        <span class="coming-soon">Coming Soon</span>
+                    </li>
+                    <li class="unit-item disabled" data-unit="circuits-and-electricity">
+                        <span class="unit-name">Circuits & Electricity</span>
+                        <span class="coming-soon">Coming Soon</span>
+                    </li>
+                    <li class="unit-item disabled" data-unit="energy">
+                        <span class="unit-name">Energy & Work</span>
+                        <span class="coming-soon">Coming Soon</span>
+                    </li>
+                </ul>
+            </aside>
             
-            <!-- HOME SECTION -->
-            <section id="home" class="section active">
-                <div class="hero">
-                    <h1>PhysicsLab</h1>
-                    <p class="tagline">Stop memorizing formulas. Start understanding.</p>
-                    <p class="description">Beta Version - Content incomplete, features may change</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="document.querySelector('.features-grid').scrollIntoView({behavior: 'smooth'})">
-                           GET STARTED
-                        </button>
-                        <button class="btn btn-secondary" onclick="navigateTo('simulation')">Explore Simulations</button>
-                    </div>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card" onclick="navigateTo('lessons-home')">
-                        <h3>Lessons</h3>
-                        <p>Learn physics step by step in lessons</p>
-                    </div>
-                    <div class="feature-card" onclick="navigateTo('simulation')">
-                        <h3>Simulations</h3>
-                        <p>Interact with real-time animations to understand how systems work!</p>
-                    </div>
-                    <div class="feature-card" onclick="navigateTo('practice')">
-                        <h3>Practice</h3>
-                        <p>unlimited practice problems</p>
-                    </div>
-                    <div class="feature-card" onclick="navigateTo('formulas')">
-                        <h3>Formulas</h3>
-                        <p>Reference sheet to key equations and concepts</p>
-                    </div>
-                </div>
-            </section>
             
-            <!--SIMULATIONS OVERVIEW-->
-            <section id="simulation" class="section">
-                <h2>Simulations</h2>                
-                <div class="simulations-container">
-                    <div class="simulation-grid">
-                        <div class="simulations-card">
-                            <div class="sim-image">
-                                <img src="assets/dropping-preview.png" alt="Dropping an Object"><canvas id="preview-drop" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
-                            </div>
-                            <h4>Dropping an Object from Height</h4>
-                            <p>Understand how objects fall under gravity</p>
-                            <button class="btn btn-primary" onclick="navigateTo('sim-dropping')">Launch</button>
-                        </div>
-                        
-                        <div class="simulations-card">
-                            <div class="sim-image">
-                                <img src="assets/throwing-preview.png" alt="Throwing an Object"><canvas id="preview-throw" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
-                            </div>
-                            <h4>Throwing an Object Straight Up</h4>
-                            <p>Explore velocity and maximum height</p>
-                            <button class="btn btn-primary" onclick="navigateTo('sim-throwing')">Launch</button>
-                        </div>
-                        
-                        <div class="simulations-card">
-                            <div class="sim-image">
-                                <img src="assets/speeding-preview.png" alt="Car Speeding Up"><canvas id="preview-speed" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
-                            </div>
-                            <h4>A Car Speeding Up</h4>
-                            <p>See how acceleration affects velocity</p>
-                            <button class="btn btn-primary" onclick="navigateTo('sim-speeding')">Launch</button>
-                        </div>
-                        
-                        <div class="simulations-card">
-                            <div class="sim-image">
-                                <img src="assets/braking-preview.png" alt="Car Braking"><canvas id="preview-brake" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
-                            </div>
-                            <h4>A Car Braking to a Stop</h4>
-                            <p>Understand deceleration and stopping distance</p>
-                            <button class="btn btn-primary" onclick="navigateTo('sim-braking')">Launch</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!--SIMULATION 1: DROPPING OBJECT-->
-            <section id="sim-dropping" class="section">
-                <h3>Dropping a Ball from Height</h3>
-                <div class="sim-panel">
-                    <div class="canvas-box">
-                        <canvas id="canvas-dropping"></canvas>
-                    </div>    
-                    
-                    <div class="controls">
-                        <div class="controls-header">Controls</div>
-                        <div class="sim-info">
-                            <strong>Gravity:</strong> 9.81 m/s² (Earth)<br>
-                            Click "Start Fall" to begin the simulation
-                        </div>
-                        
-                        <div class="controls-section">
-                            <div class="controls-section-title">Parameters</div>
-                            <button id="start" class="btn btn-primary">▶️ Start Fall</button>
-                            <button id="reset" class="btn btn-secondary">🔄 Reset</button>
-                            <div class="control">
-                                <label for="height">Height (meters)</label>
-                                <input type="range" id="height" min="50" max="350" value="100" step="15">
-                                <div class="value" id="heightVal">100</div>
-                            </div>
-                        </div>
-
-                        <div class="stat-toggles">
-                            <span class="stat-toggles-title">📊 Display Stats</span>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vi" checked>
-                                <label for="toggle-vi">Initial Velocity (Vi)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vf" checked>
-                                <label for="toggle-vf">Final Velocity (Vf)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-time" checked>
-                                <label for="toggle-time">Time Elapsed</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-distance" checked>
-                                <label for="toggle-distance">Distance Fallen</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-height" checked>
-                                <label for="toggle-height">Height Above Ground</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--SIMULATION 2: THROWING UP-->
-            <section id="sim-throwing" class="section">
-                <h3>Throwing an Object Straight Up</h3>
-                <div class="sim-panel">
-                    <div class="canvas-box">
-                        <canvas id="canvas-throwing"></canvas>
-                    </div>    
-                    
-                    <div class="controls">
-                        <div class="controls-header">Controls</div>
-                        <div class="sim-info">
-                            <strong>Gravity:</strong> 9.81 m/s² (Earth)<br>
-                            The ball moves upward, slows down, then falls back
-                        </div>
-                        
-                        <div class="controls-section">
-                            <div class="controls-section-title">Parameters</div>
-                            <button id="start" class="btn btn-primary">▶️ Launch</button>
-                            <button id="reset" class="btn btn-secondary">🔄 Reset</button>
-                            <div class="control">
-                                <label for="velocity">Initial Velocity (m/s)</label>
-                                <input type="range" id="velocity" min="5" max="40" value="20" step="2">
-                                <div class="value" id="velocityVal">20</div>
-                            </div>
-                        </div>
-
-                        <div class="stat-toggles">
-                            <span class="stat-toggles-title">📊 Display Stats</span>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vi" checked>
-                                <label for="toggle-vi">Initial Velocity (Vi)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vf" checked>
-                                <label for="toggle-vf">Final Velocity (Vf)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-time" checked>
-                                <label for="toggle-time">Time in Air</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-max-height" checked>
-                                <label for="toggle-max-height">Max Height</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-time-to-max" checked>
-                                <label for="toggle-time-to-max">Time to Max Height</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-height-now" checked>
-                                <label for="toggle-height-now">Height Now</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--SIMULATION 3: CAR SPEEDING UP-->
-            <section id="sim-speeding" class="section">
-                <h3>A Car Speeding Up</h3>
-                <div class="sim-panel">
-                    <div class="canvas-box">
-                        <canvas id="canvas-speeding"></canvas>
-                    </div>    
-                    
-                    <div class="controls">
-                        <div class="controls-header">Controls</div>
-                        <div class="sim-info">
-                            <strong>Scenario:</strong> Car accelerates from rest<br>
-                            Watch how velocity increases over time
-                        </div>
-                        
-                        <div class="controls-section">
-                            <div class="controls-section-title">Parameters</div>
-                            <button id="start" class="btn btn-primary">▶️ Accelerate</button>
-                            <button id="reset" class="btn btn-secondary">🔄 Reset</button>
-                            <div class="control">
-                                <label for="acceleration">Acceleration (m/s²)</label>
-                                <input type="range" id="acceleration" min="1" max="10" value="3" step="0.5">
-                                <div class="value" id="accelerationVal">3</div>
-                            </div>
-                        </div>
-
-                        <div class="stat-toggles">
-                            <span class="stat-toggles-title">📊 Display Stats</span>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vi" checked>
-                                <label for="toggle-vi">Initial Velocity (Vi)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vf" checked>
-                                <label for="toggle-vf">Final Velocity (Vf)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-acceleration" checked>
-                                <label for="toggle-acceleration">Acceleration</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-time" checked>
-                                <label for="toggle-time">Time</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-distance" checked>
-                                <label for="toggle-distance">Distance Traveled</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--SIMULATION 4: CAR BRAKING-->
-            <section id="sim-braking" class="section">
-                <h3>A Car Braking to a Stop</h3>
-                <div class="sim-panel">
-                    <div class="canvas-box">
-                        <canvas id="canvas-braking"></canvas>
-                    </div>    
-                    
-                    <div class="controls">
-                        <div class="controls-header">Controls</div>
-                        <div class="sim-info">
-                            <strong>Scenario:</strong> Car brakes with deceleration<br>
-                            The dashed line shows calculated stopping distance
-                        </div>
-                        
-                        <div class="controls-section">
-                            <div class="controls-section-title">Parameters</div>
-                            <button id="start" class="btn btn-primary">🛑 Start Braking</button>
-                            <button id="reset" class="btn btn-secondary">🔄 Reset</button>
-                            <div class="control">
-                                <label for="velocity">Initial Velocity (m/s)</label>
-                                <input type="range" id="velocity" min="10" max="50" value="30" step="2">
-                                <div class="value" id="velocityVal">30</div>
-                            </div>
-                            <div class="control">
-                                <label for="deceleration">Deceleration (m/s²)</label>
-                                <input type="range" id="deceleration" min="1" max="10" value="5" step="0.5">
-                                <div class="value" id="decelerationVal">5</div>
-                            </div>
-                        </div>
-
-                        <div class="stat-toggles">
-                            <span class="stat-toggles-title">📊 Display Stats</span>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vi" checked>
-                                <label for="toggle-vi">Initial Velocity (Vi)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-vf" checked>
-                                <label for="toggle-vf">Final Velocity (Vf)</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-deceleration" checked>
-                                <label for="toggle-deceleration">Deceleration</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-time" checked>
-                                <label for="toggle-time">Time</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-distance" checked>
-                                <label for="toggle-distance">Distance Traveled</label>
-                            </div>
-                            <div class="toggle-group">
-                                <input type="checkbox" id="toggle-stopping-distance" checked>
-                                <label for="toggle-stopping-distance">Expected Stopping Distance</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        
-        <!-- PRACTICE SECTION -->
-        <section id="practice" class="section">
-            <h2>Practice Problems</h2>
-            <div style="width: 100%; max-width: 800px; padding: 40px; margin: 0 auto;">
+            <main class="homepage">
                 
-                <!-- Difficulty Selector -->
-                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap;">
-                    <button class="btn btn-primary difficulty-btn" onclick="setDifficulty('easy'); displayProblem()">Easy</button>
-                    <button class="btn btn-secondary difficulty-btn" onclick="setDifficulty('medium'); displayProblem()">Medium</button>
-                    <button class="btn btn-secondary difficulty-btn" onclick="setDifficulty('hard'); displayProblem()">Hard</button>
-                </div>
-
-                <!-- Problem Display -->
-                <div style="margin-bottom: 30px;">
-                    <div id="problem-title" style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 12px;"></div>
-                    <div id="problem-description" style="font-size: 15px; color: #d0d0d0; line-height: 1.6; margin-bottom: 16px;"></div>
-                    <div id="problem-formula" style="color: #a0a0a0; font-family: monospace; font-size: 12px; padding: 12px 0; border-top: 1px solid rgba(0, 204, 255, 0.2); border-bottom: 1px solid rgba(0, 204, 255, 0.2);"></div>
-                </div>
-
-                <!-- Answer Input -->
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <input type="number" id="answer-input" placeholder="Enter answer" style="flex: 1; padding: 10px 12px; background: #1a2a4a; border: 1px solid rgba(0, 102, 204, 0.3); border-radius: 6px; color: #ffffff; font-size: 13px;" step="0.01">
-                    <span id="units-display" style="display: flex; align-items: center; color: #a0a0a0; padding: 10px 12px; font-size: 13px;"></span>
-                    <button class="btn btn-primary" onclick="submitAnswer()" style="padding: 10px 20px; width: auto;">Check</button>
-                </div>
-
-                <!-- Feedback -->
-                <div id="feedback" style="padding: 16px 0; color: #d0d0d0; line-height: 1.6; margin-bottom: 20px; display: none; border-bottom: 1px solid rgba(0, 204, 255, 0.2);"></div>
-
-                <!-- Hint -->
-                <div id="hint-box" style="padding: 12px 0; color: #ffc107; margin-bottom: 20px; display: none; border-top: 1px solid rgba(255, 193, 7, 0.3); border-bottom: 1px solid rgba(255, 193, 7, 0.3);"></div>
-
-                <!-- Solution -->
-                <div id="solution-box" style="padding: 12px 0; color: #90ee90; margin-bottom: 20px; display: none; font-family: monospace; font-size: 12px; border-top: 1px solid rgba(76, 175, 80, 0.3);"></div>
-
-                <!-- Next Problem Button -->
-                <button class="btn btn-secondary" onclick="generateProblem(); displayProblem();" style="width: 100%; margin-bottom: 30px;">Next Problem</button>
-
-                <!-- Stats -->
-                <div style="padding: 20px 0; text-align: center; border-top: 1px solid rgba(0, 204, 255, 0.2);">
-                    <div style="color: #888888; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.8px;">Progress</div>
-                    <div style="font-size: 20px; font-weight: 700; color: #00ccff;"><span id="score">0</span> / <span id="attempts">0</span></div>
-                    <div style="color: #888888; font-size: 12px; margin-top: 8px;">Accuracy: <span id="accuracy">0</span>%</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- FORMULAS SECTION -->
-        <section id="formulas" class="section">
-            <h2>Formula Sheet</h2>
-            <p>Physics Reference - SPH3U/4U Curriculum</p>
-            <div class="formulas-content">
-                <img src="assets/Physics formula sheet.png" alt="Physics Formula sheet" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);">
-            </div>
-        </section>
-        
-    </main>
-    
-</div>
-<script src="navigation.js"></script>
-    <script src="simulations.js"></script>
-<script src="practice.js"></script>
-<script>
-    // Practice section helpers - only run if practice.js loaded
-    function displayProblem() {
-        if (typeof problemState === 'undefined' || !problemState || !problemState.currentProblem) return;
-        
-        const prob = problemState.currentProblem;
-        document.getElementById('problem-title').textContent = prob.title;
-        document.getElementById('problem-description').textContent = prob.description;
-        document.getElementById('problem-formula').textContent = `Formula: ${prob.formula}`;
-        document.getElementById('units-display').textContent = prob.units;
-        document.getElementById('answer-input').value = '';
-        document.getElementById('feedback').style.display = 'none';
-        document.getElementById('hint-box').style.display = 'none';
-        document.getElementById('solution-box').style.display = 'none';
-        
-        updateStats();
-    }
-
-    function submitAnswer() {
-        if (typeof problemState === 'undefined' || !problemState) return;
-        
-        const answer = document.getElementById('answer-input').value;
-        if (!answer) return;
-        
-        const result = checkAnswer(answer);
-        const feedback = document.getElementById('feedback');
-        
-        feedback.innerHTML = result.message;
-        feedback.style.display = 'block';
-        feedback.style.color = result.correct ? '#4caf50' : '#ff6b6b';
-        
-        if (problemState.showHint && !result.correct) {
-            document.getElementById('hint-box').innerHTML = getHint();
-            document.getElementById('hint-box').style.display = 'block';
-        }
-        
-        if (problemState.showSolution && !result.correct) {
-            document.getElementById('solution-box').innerHTML = getSolution();
-            document.getElementById('solution-box').style.display = 'block';
-        }
-        
-        updateStats();
-    }
-
-    function updateStats() {
-        if (typeof getStats === 'function') {
-            const stats = getStats();
-            document.getElementById('score').textContent = stats.correctAnswers;
-            document.getElementById('attempts').textContent = stats.totalAttempts;
-            document.getElementById('accuracy').textContent = stats.accuracy;
-        }
-    }
-
-    // Load first problem on page load - with delay to ensure practice.js loads
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            if (typeof problemState !== 'undefined' && problemState) {
-                displayProblem();
+                <!-- HOME SECTION -->
+                <section id="home" class="section active">
+                    <div class="hero">
+                        <h1>PhysicsLab</h1>
+                        <p class="tagline">Stop memorizing formulas. Start understanding.</p>
+                        <p class="description">Beta Version - Content incomplete, features may change</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="document.querySelector('.features-grid').scrollIntoView({behavior: 'smooth'})">
+                                GET STARTED
+                            </button>
+                            <button class="btn btn-secondary" onclick="navigateTo('simulation')">Explore Simulations</button>
+                        </div>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card" onclick="navigateTo('lessons-home')">
+                            <h3>Lessons</h3>
+                            <p>Learn physics step by step in lessons</p>
+                        </div>
+                        <div class="feature-card" onclick="navigateTo('simulation')">
+                            <h3>Simulations</h3>
+                            <p>Interact with real-time animations to understand how systems work!</p>
+                        </div>
+                        <div class="feature-card" onclick="navigateTo('practice')">
+                            <h3>Practice</h3>
+                            <p>unlimited practice problems</p>
+                        </div>
+                        <div class="feature-card" onclick="navigateTo('formulas')">
+                            <h3>Formulas</h3>
+                            <p>Reference sheet to key equations and concepts</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!--SIMULATIONS OVERVIEW-->
+                <section id="simulation" class="section">
+                    <h2>Simulations</h2>                
+                    <div class="simulations-container">
+                        <div class="simulation-grid">
+                            <div class="simulations-card">
+                                <div class="sim-image">
+                                    <img src="assets/dropping-preview.png" alt="Dropping an Object"><canvas id="preview-drop" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
+                                </div>
+                                <h4>Dropping an Object from Height</h4>
+                                <p>Understand how objects fall under gravity</p>
+                                <button class="btn btn-primary" onclick="navigateTo('sim-dropping')">Launch</button>
+                            </div>
+                            
+                            <div class="simulations-card">
+                                <div class="sim-image">
+                                    <img src="assets/throwing-preview.png" alt="Throwing an Object"><canvas id="preview-throw" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
+                                </div>
+                                <h4>Throwing an Object Straight Up</h4>
+                                <p>Explore velocity and maximum height</p>
+                                <button class="btn btn-primary" onclick="navigateTo('sim-throwing')">Launch</button>
+                            </div>
+                            
+                            <div class="simulations-card">
+                                <div class="sim-image">
+                                    <img src="assets/speeding-preview.png" alt="Car Speeding Up"><canvas id="preview-speed" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
+                                </div>
+                                <h4>A Car Speeding Up</h4>
+                                <p>See how acceleration affects velocity</p>
+                                <button class="btn btn-primary" onclick="navigateTo('sim-speeding')">Launch</button>
+                            </div>
+                            
+                            <div class="simulations-card">
+                                <div class="sim-image">
+                                    <img src="assets/braking-preview.png" alt="Car Braking"><canvas id="preview-brake" width="300" height="200" style="background: linear-gradient(135deg, #2b5b9b, #1a3a6b); display:none;"></canvas>
+                                </div>
+                                <h4>A Car Braking to a Stop</h4>
+                                <p>Understand deceleration and stopping distance</p>
+                                <button class="btn btn-primary" onclick="navigateTo('sim-braking')">Launch</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!--SIMULATION 1: DROPPING OBJECT-->
+                <section id="sim-dropping" class="section">
+                    <h3>Dropping a Ball from Height</h3>
+                    <div class="sim-panel">
+                        <div class="canvas-box">
+                            <canvas id="canvas-dropping"></canvas>
+                        </div>    
+                        
+                        <div class="controls">
+                            <div class="controls-header">Controls</div>
+                            <div class="sim-info">
+                                <strong>Gravity:</strong> 9.81 m/s² (Earth)<br>
+                                Click "Start Fall" to begin the simulation
+                            </div>
+                            
+                            <div class="controls-section">
+                                <div class="controls-section-title">Parameters</div>
+                                <button id="start" class="btn btn-primary">▶️ Start Fall</button>
+                                <button id="reset" class="btn btn-secondary">🔄 Reset</button>
+                                <div class="control">
+                                    <label for="height">Height (meters)</label>
+                                    <input type="range" id="height" min="50" max="350" value="100" step="15">
+                                    <div class="value" id="heightVal">100</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-toggles">
+                                <span class="stat-toggles-title">📊 Display Stats</span>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vi" checked>
+                                    <label for="toggle-vi">Initial Velocity (Vi)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vf" checked>
+                                    <label for="toggle-vf">Final Velocity (Vf)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-time" checked>
+                                    <label for="toggle-time">Time Elapsed</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-distance" checked>
+                                    <label for="toggle-distance">Distance Fallen</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-height" checked>
+                                    <label for="toggle-height">Height Above Ground</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!--SIMULATION 2: THROWING UP-->
+                <section id="sim-throwing" class="section">
+                    <h3>Throwing an Object Straight Up</h3>
+                    <div class="sim-panel">
+                        <div class="canvas-box">
+                            <canvas id="canvas-throwing"></canvas>
+                        </div>    
+                        
+                        <div class="controls">
+                            <div class="controls-header">Controls</div>
+                            <div class="sim-info">
+                                <strong>Gravity:</strong> 9.81 m/s² (Earth)<br>
+                                The ball moves upward, slows down, then falls back
+                            </div>
+                            
+                            <div class="controls-section">
+                                <div class="controls-section-title">Parameters</div>
+                                <button id="start" class="btn btn-primary">▶️ Launch</button>
+                                <button id="reset" class="btn btn-secondary">🔄 Reset</button>
+                                <div class="control">
+                                    <label for="velocity">Initial Velocity (m/s)</label>
+                                    <input type="range" id="velocity" min="5" max="40" value="20" step="2">
+                                    <div class="value" id="velocityVal">20</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-toggles">
+                                <span class="stat-toggles-title">📊 Display Stats</span>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vi" checked>
+                                    <label for="toggle-vi">Initial Velocity (Vi)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vf" checked>
+                                    <label for="toggle-vf">Final Velocity (Vf)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-time" checked>
+                                    <label for="toggle-time">Time in Air</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-max-height" checked>
+                                    <label for="toggle-max-height">Max Height</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-time-to-max" checked>
+                                    <label for="toggle-time-to-max">Time to Max Height</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-height-now" checked>
+                                    <label for="toggle-height-now">Height Now</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!--SIMULATION 3: CAR SPEEDING UP-->
+                <section id="sim-speeding" class="section">
+                    <h3>A Car Speeding Up</h3>
+                    <div class="sim-panel">
+                        <div class="canvas-box">
+                            <canvas id="canvas-speeding"></canvas>
+                        </div>    
+                        
+                        <div class="controls">
+                            <div class="controls-header">Controls</div>
+                            <div class="sim-info">
+                                <strong>Scenario:</strong> Car accelerates from rest<br>
+                                Watch how velocity increases over time
+                            </div>
+                            
+                            <div class="controls-section">
+                                <div class="controls-section-title">Parameters</div>
+                                <button id="start" class="btn btn-primary">▶️ Accelerate</button>
+                                <button id="reset" class="btn btn-secondary">🔄 Reset</button>
+                                <div class="control">
+                                    <label for="acceleration">Acceleration (m/s²)</label>
+                                    <input type="range" id="acceleration" min="1" max="10" value="3" step="0.5">
+                                    <div class="value" id="accelerationVal">3</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-toggles">
+                                <span class="stat-toggles-title">📊 Display Stats</span>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vi" checked>
+                                    <label for="toggle-vi">Initial Velocity (Vi)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vf" checked>
+                                    <label for="toggle-vf">Final Velocity (Vf)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-acceleration" checked>
+                                    <label for="toggle-acceleration">Acceleration</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-time" checked>
+                                    <label for="toggle-time">Time</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-distance" checked>
+                                    <label for="toggle-distance">Distance Traveled</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!--SIMULATION 4: CAR BRAKING-->
+                <section id="sim-braking" class="section">
+                    <h3>A Car Braking to a Stop</h3>
+                    <div class="sim-panel">
+                        <div class="canvas-box">
+                            <canvas id="canvas-braking"></canvas>
+                        </div>    
+                        
+                        <div class="controls">
+                            <div class="controls-header">Controls</div>
+                            <div class="sim-info">
+                                <strong>Scenario:</strong> Car brakes with deceleration<br>
+                                The dashed line shows calculated stopping distance
+                            </div>
+                            
+                            <div class="controls-section">
+                                <div class="controls-section-title">Parameters</div>
+                                <button id="start" class="btn btn-primary">🛑 Start Braking</button>
+                                <button id="reset" class="btn btn-secondary">🔄 Reset</button>
+                                <div class="control">
+                                    <label for="velocity">Initial Velocity (m/s)</label>
+                                    <input type="range" id="velocity" min="10" max="50" value="30" step="2">
+                                    <div class="value" id="velocityVal">30</div>
+                                </div>
+                                <div class="control">
+                                    <label for="deceleration">Deceleration (m/s²)</label>
+                                    <input type="range" id="deceleration" min="1" max="10" value="5" step="0.5">
+                                    <div class="value" id="decelerationVal">5</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-toggles">
+                                <span class="stat-toggles-title">📊 Display Stats</span>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vi" checked>
+                                    <label for="toggle-vi">Initial Velocity (Vi)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-vf" checked>
+                                    <label for="toggle-vf">Final Velocity (Vf)</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-deceleration" checked>
+                                    <label for="toggle-deceleration">Deceleration</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-time" checked>
+                                    <label for="toggle-time">Time</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-distance" checked>
+                                    <label for="toggle-distance">Distance Traveled</label>
+                                </div>
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="toggle-stopping-distance" checked>
+                                    <label for="toggle-stopping-distance">Expected Stopping Distance</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- PRACTICE SECTION -->
+                <section id="practice" class="section">
+                    <h2>Practice Problems</h2>
+                    <div style="width: 100%; max-width: 800px; padding: 40px; margin: 0 auto;">
+                        
+                        <!-- Difficulty Selector -->
+                        <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap;">
+                            <button class="btn btn-primary difficulty-btn" onclick="setDifficulty('easy'); displayProblem()">Easy</button>
+                            <button class="btn btn-secondary difficulty-btn" onclick="setDifficulty('medium'); displayProblem()">Medium</button>
+                            <button class="btn btn-secondary difficulty-btn" onclick="setDifficulty('hard'); displayProblem()">Hard</button>
+                        </div>
+                        
+                        <!-- Problem Display -->
+                        <div style="margin-bottom: 30px;">
+                            <div id="problem-title" style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 12px;"></div>
+                            <div id="problem-description" style="font-size: 15px; color: #d0d0d0; line-height: 1.6; margin-bottom: 16px;"></div>
+                            <div id="problem-formula" style="color: #a0a0a0; font-family: monospace; font-size: 12px; padding: 12px 0; border-top: 1px solid rgba(0, 204, 255, 0.2); border-bottom: 1px solid rgba(0, 204, 255, 0.2);"></div>
+                        </div>
+                        
+                        <!-- Answer Input -->
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <input type="number" id="answer-input" placeholder="Enter answer" style="flex: 1; padding: 10px 12px; background: #1a2a4a; border: 1px solid rgba(0, 102, 204, 0.3); border-radius: 6px; color: #ffffff; font-size: 13px;" step="0.01">
+                            <span id="units-display" style="display: flex; align-items: center; color: #a0a0a0; padding: 10px 12px; font-size: 13px;"></span>
+                            <button class="btn btn-primary" onclick="submitAnswer()" style="padding: 10px 20px; width: auto;">Check</button>
+                        </div>
+                        
+                        <!-- Feedback -->
+                        <div id="feedback" style="padding: 16px 0; color: #d0d0d0; line-height: 1.6; margin-bottom: 20px; display: none; border-bottom: 1px solid rgba(0, 204, 255, 0.2);"></div>
+                        
+                        <!-- Hint -->
+                        <div id="hint-box" style="padding: 12px 0; color: #ffc107; margin-bottom: 20px; display: none; border-top: 1px solid rgba(255, 193, 7, 0.3); border-bottom: 1px solid rgba(255, 193, 7, 0.3);"></div>
+                        
+                        <!-- Solution -->
+                        <div id="solution-box" style="padding: 12px 0; color: #90ee90; margin-bottom: 20px; display: none; font-family: monospace; font-size: 12px; border-top: 1px solid rgba(76, 175, 80, 0.3);"></div>
+                        
+                        <!-- Next Problem Button -->
+                        <button class="btn btn-secondary" onclick="generateProblem(); displayProblem();" style="width: 100%; margin-bottom: 30px;">Next Problem</button>
+                        
+                        <!-- Stats -->
+                        <div style="padding: 20px 0; text-align: center; border-top: 1px solid rgba(0, 204, 255, 0.2);">
+                            <div style="color: #888888; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.8px;">Progress</div>
+                            <div style="font-size: 20px; font-weight: 700; color: #00ccff;"><span id="score">0</span> / <span id="attempts">0</span></div>
+                            <div style="color: #888888; font-size: 12px; margin-top: 8px;">Accuracy: <span id="accuracy">0</span>%</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- FORMULAS SECTION -->
+                <section id="formulas" class="section">
+                    <h2>Formula Sheet</h2>
+                    <p>Physics Reference - SPH3U/4U Curriculum</p>
+                    <div class="formulas-content">
+                        <img src="assets/Physics formula sheet.png" alt="Physics Formula sheet" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);">
+                    </div>
+                </section>
+                
+            </main>
+            
+        </div>
+        <script src="navigation.js"></script>
+        <script src="simulations.js"></script>
+        <script src="practice.js"></script>
+        <script>
+            // Practice section helpers - only run if practice.js loaded
+            function displayProblem() {
+                if (typeof problemState === 'undefined' || !problemState || !problemState.currentProblem) return;
+                
+                const prob = problemState.currentProblem;
+                document.getElementById('problem-title').textContent = prob.title;
+                document.getElementById('problem-description').textContent = prob.description;
+                document.getElementById('problem-formula').textContent = `Formula: ${prob.formula}`;
+                document.getElementById('units-display').textContent = prob.units;
+                document.getElementById('answer-input').value = '';
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('hint-box').style.display = 'none';
+                document.getElementById('solution-box').style.display = 'none';
+                
+                updateStats();
             }
-        }, 100);
-    });
-</script>
-</body>
-</html>
+            
+            function submitAnswer() {
+                if (typeof problemState === 'undefined' || !problemState) return;
+                
+                const answer = document.getElementById('answer-input').value;
+                if (!answer) return;
+                
+                const result = checkAnswer(answer);
+                const feedback = document.getElementById('feedback');
+                
+                feedback.innerHTML = result.message;
+                feedback.style.display = 'block';
+                feedback.style.color = result.correct ? '#4caf50' : '#ff6b6b';
+                
+                if (problemState.showHint && !result.correct) {
+                    document.getElementById('hint-box').innerHTML = getHint();
+                    document.getElementById('hint-box').style.display = 'block';
+                }
+                
+                if (problemState.showSolution && !result.correct) {
+                    document.getElementById('solution-box').innerHTML = getSolution();
+                    document.getElementById('solution-box').style.display = 'block';
+                }
+                
+                updateStats();
+            }
+            
+            function updateStats() {
+                if (typeof getStats === 'function') {
+                    const stats = getStats();
+                    document.getElementById('score').textContent = stats.correctAnswers;
+                    document.getElementById('attempts').textContent = stats.totalAttempts;
+                    document.getElementById('accuracy').textContent = stats.accuracy;
+                }
+            }
+            
+            // Load first problem on page load - with delay to ensure practice.js loads
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    if (typeof problemState !== 'undefined' && problemState) {
+                        displayProblem();
+                    }
+                }, 100);
+            });
+        </script>
+    </body>
+    </html>
