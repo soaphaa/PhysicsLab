@@ -11,7 +11,7 @@
 <body>
     <!-- Top Nagivation Bar-->
     <nav class="top-nav">
-        <div class="nav-brand" onclick="navigateTo('home')"><img src="assets/logo-physicslab.png" alt="PhysicsLab"></div>
+        <div class="nav-brand" onclick="navigateTo('home')"><img src="assets/logo.png" alt="PhysicsLab"></div>
         
         <ul class="nav-menu">
             <li><a href="#" onclick="navigateTo('home')" class="nav-link active">Home</a></li>
@@ -35,7 +35,7 @@
             <div class="sidebar-header">Topics</div>
             <ul class="unit-list">
                 <li class="unit-item active" data-unit="projectile">
-                    <a href="lessons.html" class="unit-name">Projectile Motion</a>
+                    <span class="unit-name">Projectile Motion</span>
                 </li>
                 
                 <li class="unit-item disabled" data-unit="forces">
@@ -79,7 +79,7 @@
                 </div>
                 
                 <div class="features-grid">
-                    <div class="feature-card" onclick="window.location.href='lessons.html'">
+                    <div class="feature-card" onclick="navigateTo('lessons-home')">
                         <h3>Lessons</h3>
                         <p>Learn physics step by step in lessons</p>
                     </div>
@@ -427,15 +427,12 @@
     
 </div>
 <script src="navigation.js"></script>
-<script src="freefalling-sim.js"></script>
-<script src="throwing-up-sim.js"></script>
-<script src="car-speeding-sim.js"></script>
-<script src="car-braking-sim.js"></script>
+    <script src="simulations.js"></script>
 <script src="practice.js"></script>
 <script>
-    // Practice section helpers
+    // Practice section helpers - only run if practice.js loaded
     function displayProblem() {
-        if (!problemState.currentProblem) return;
+        if (typeof problemState === 'undefined' || !problemState || !problemState.currentProblem) return;
         
         const prob = problemState.currentProblem;
         document.getElementById('problem-title').textContent = prob.title;
@@ -451,6 +448,8 @@
     }
 
     function submitAnswer() {
+        if (typeof problemState === 'undefined' || !problemState) return;
+        
         const answer = document.getElementById('answer-input').value;
         if (!answer) return;
         
@@ -475,14 +474,22 @@
     }
 
     function updateStats() {
-        const stats = getStats();
-        document.getElementById('score').textContent = stats.correctAnswers;
-        document.getElementById('attempts').textContent = stats.totalAttempts;
-        document.getElementById('accuracy').textContent = stats.accuracy;
+        if (typeof getStats === 'function') {
+            const stats = getStats();
+            document.getElementById('score').textContent = stats.correctAnswers;
+            document.getElementById('attempts').textContent = stats.totalAttempts;
+            document.getElementById('accuracy').textContent = stats.accuracy;
+        }
     }
 
-    // Load first problem on page load
-    displayProblem();
+    // Load first problem on page load - with delay to ensure practice.js loads
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (typeof problemState !== 'undefined' && problemState) {
+                displayProblem();
+            }
+        }, 100);
+    });
 </script>
 </body>
 </html>

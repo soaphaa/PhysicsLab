@@ -7,6 +7,9 @@ const navLinks = document.querySelectorAll('.nav-link');
 const minimizedBtn = document.getElementById('minimize-btn');
 const sidebarState ={isMinimized: false,};
 
+// Store simulation instances
+let simInstances = {};
+
 function toggleSidebarMinimize(){
     const sidebar = document.querySelector('.sidebar');
     const mainContainer = document.querySelector('.main-container');
@@ -24,6 +27,7 @@ function setupNavigationListeners(){
 }
 
 function navigateTo(sectionId){
+    window.scrollTo(0, 0);
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
         section.classList.remove('active');
@@ -59,7 +63,8 @@ function navigateTo(sectionId){
     // RESIZE CANVAS FOR ALL SIM SECTIONS
     if(sectionId === 'sim-dropping' || sectionId === 'sim-throwing' || sectionId === 'sim-speeding' || sectionId === 'sim-braking'){
         setTimeout(() => {
-            let canvasId = 'canvas';
+            // Just resize the canvas - the simulation class handles the rest
+            let canvasId = 'canvas-dropping';
             if(sectionId === 'sim-dropping') canvasId = 'canvas-dropping';
             else if(sectionId === 'sim-throwing') canvasId = 'canvas-throwing';
             else if(sectionId === 'sim-speeding') canvasId = 'canvas-speeding';
@@ -71,24 +76,11 @@ function navigateTo(sectionId){
                 canvas.height = canvas.parentElement.offsetHeight;
                 console.log('Canvas restarted at:', canvas.width, 'x', canvas.height);
             }
-
-            // TRIGGER SIM INIT FUNCTIONS
-            if(sectionId === 'sim-dropping' && typeof initSimDropping === 'function') {
-                initSimDropping();
-            }
-            else if(sectionId === 'sim-throwing' && typeof initSimThrowing === 'function') {
-                initSimThrowing();
-            }
-            else if(sectionId === 'sim-speeding' && typeof initSimSpeeding === 'function') {
-                initSimSpeeding();
-            }
-            else if(sectionId === 'sim-braking' && typeof initSimBraking === 'function') {
-                initSimBraking();
-            }
         }, 100);
     }
 }
 
+// Store sim instances when they're created
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigationListeners();
 });

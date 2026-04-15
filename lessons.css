@@ -215,6 +215,10 @@
     color: #ffffff;
     margin-bottom: 40px;
     margin-top: 0;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* ============================================
@@ -235,6 +239,10 @@
     color: #ffffff;
     margin-bottom: 16px;
     margin-top: 0;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .lesson-section p {
@@ -242,6 +250,11 @@
     color: #c0c0c0;
     line-height: 1.8;
     margin: 0 0 16px 0;
+    margin-left: 100px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .lesson-section strong {

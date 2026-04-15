@@ -2,7 +2,7 @@
 
 An interractive web application for learning introductory High school physics through visual simulations and structured lessons, built by a high schooler.
 
-**Access the website here!** : [text](https://physics-lab-ten-peach.vercel.app/index.html#)
+**Access the website here!** : [PhysicsLab vercel app](https://physics-lab-ten-peach.vercel.app/index.html#)
 
 🚧 **Currently in Beta** - This project demonstrates key kinematics concepts with 4 interactive simulations. Future updates will include more lessons, more physics units (circular motion, energy, waves), and expanded practice problems. 🚧 
 
@@ -30,7 +30,7 @@ The website can be navigated through the top bar and the homepage. This is where
 
 ## FEEDBACK FORM!
 **If you are interested in trying out my website, it would be appreciated if you filled out this quick feedback form for my future enhancements** 
-- Link: [text](https://forms.gle/EL8Apirrsa4JpW1f6)
+- Link: [Google form Link : Physics Lab Feedback Form](https://forms.gle/EL8Apirrsa4JpW1f6)
 
 ## Credits
 Built from the Ontario physics curriculum (SPH3U/4U)

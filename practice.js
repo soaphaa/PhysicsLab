@@ -193,9 +193,8 @@ let problemState = {
     history: []
 };
 
-// ============================================
-// HINT SYSTEM - Progressive guidance
-// ============================================
+
+//HINT SYSTEM
 const hintTexts = {
     simple_drop: [
         'Hint 1: This is free fall (initial velocity = 0)',
