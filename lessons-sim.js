@@ -1,474 +1,553 @@
 // ============================================
-// MINI SIMULATIONS FOR LESSONS
-// ============================================
-// These are lightweight, focused simulations
-// embedded directly in lesson pages
-
-// Global state for each simulation
-const simState = {
-    drop1: { height: 50, time: 0, isRunning: false, canvas: null, ctx: null, ballY: 0 },
-    throw2: { velocity: 20, time: 0, isRunning: false, canvas: null, ctx: null, ballY: 0, ballVelY: 0, maxH: 0 },
-    accel3: { accel: 3, time: 0, isRunning: false, canvas: null, ctx: null, carX: 0, carVel: 0 },
-    brake4: { speed: 30, decel: 5, time: 0, isRunning: false, canvas: null, ctx: null, carX: 0, carVel: 0, stopDist: 0 }
-};
-
-// ============================================
-// LESSON 1: FREE FALL SIMULATION
+// LESSONS PAGE SIMULATIONS
+// Same as main simulations but embedded in lessons
 // ============================================
 
-function initDropSim1() {
-    const canvas = document.getElementById('sim-drop-1');
+// SIMULATION 1: FREE FALL (for lessons)
+(function() {
+    const canvas = document.getElementById('lesson-canvas-dropping');
     if (!canvas) return;
     
-    simState.drop1.canvas = canvas;
-    simState.drop1.ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
+    const section = canvas.closest('.lesson-page');
     
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    let ballY = 50;
+    let ballVY = 0;
+    const ballRadius = 25;
+    const gravity = 0.5;
+    let isRunning = false;
+    let time = 0;
+    let ballImage = new Image();
+    let stats = { vi: 0, vf: 0, time: 0, distance: 0 };
+    let toggles = { vi: true, vf: true, time: true, distance: true, height: true };
     
-    drawDropSim1();
-    animateDropSim1();
-}
+    ballImage.onload = () => console.log('✅ Ball image loaded for lessons free fall');
+    ballImage.onerror = () => console.error('❌ Ball image failed to load');
+    ballImage.src = 'assets/ball.png';
 
-function updateDropSim1() {
-    const input = document.getElementById('height-drop-1');
-    simState.drop1.height = parseFloat(input.value);
-    document.getElementById('height-display-1').textContent = simState.drop1.height;
-    dropReset1();
-}
-
-function dropStart1() {
-    if (simState.drop1.isRunning) return;
-    simState.drop1.isRunning = true;
-}
-
-function dropReset1() {
-    simState.drop1.time = 0;
-    simState.drop1.isRunning = false;
-    simState.drop1.ballY = 20;
-    document.getElementById('time-1').textContent = '0.0';
-    document.getElementById('vel-1').textContent = '0.0';
-}
-
-function drawDropSim1() {
-    const { canvas, ctx, height, ballY, time } = simState.drop1;
-    const g = 9.81;
-    
-    // Clear
-    ctx.fillStyle = '#2b5b9b';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Scale: 1m = some pixels
-    const pixelsPerMeter = (canvas.height - 40) / height;
-    const groundLevel = canvas.height - 20;
-    const startY = 20;
-    const ballRadius = 8;
-    
-    // Current position
-    const distance = 0.5 * g * time * time;
-    const currentY = startY + distance * pixelsPerMeter;
-    
-    // Ground line
-    ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(0, groundLevel);
-    ctx.lineTo(canvas.width, groundLevel);
-    ctx.stroke();
-    
-    // Height marker
-    ctx.strokeStyle = 'rgba(0, 204, 255, 0.3)';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([5, 5]);
-    ctx.beginPath();
-    ctx.moveTo(20, startY);
-    ctx.lineTo(20, groundLevel);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    
-    ctx.fillStyle = '#a0a0a0';
-    ctx.font = '11px Arial';
-    ctx.textAlign = 'right';
-    ctx.fillText(`${height}m`, 15, startY + 5);
-    
-    // Ball
-    if (currentY < groundLevel) {
-        ctx.fillStyle = '#ff6b6b';
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, currentY, ballRadius, 0, Math.PI * 2);
-        ctx.fill();
-    } else {
-        // Ball at ground
-        ctx.fillStyle = '#ff6b6b';
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, groundLevel, ballRadius, 0, Math.PI * 2);
-        ctx.fill();
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
     }
-}
 
-function animateDropSim1() {
-    if (simState.drop1.isRunning) {
-        simState.drop1.time += 0.016; // ~60 FPS
-        
-        // Calculate distance
-        const g = 9.81;
-        const distance = 0.5 * g * simState.drop1.time * simState.drop1.time;
-        
-        // Check if landed
-        if (distance >= simState.drop1.height) {
-            simState.drop1.isRunning = false;
-            simState.drop1.time = Math.sqrt(2 * simState.drop1.height / g);
-        }
-        
-        // Update displays
-        document.getElementById('time-1').textContent = simState.drop1.time.toFixed(2);
-        const vel = g * simState.drop1.time;
-        document.getElementById('vel-1').textContent = vel.toFixed(2);
-    }
-    
-    drawDropSim1();
-    requestAnimationFrame(animateDropSim1);
-}
+    function draw() {
+        ctx.fillStyle = '#2b5b9b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// ============================================
-// LESSON 2: THROWING UP SIMULATION
-// ============================================
-
-function initThrowSim2() {
-    const canvas = document.getElementById('sim-throw-2');
-    if (!canvas) return;
-    
-    simState.throw2.canvas = canvas;
-    simState.throw2.ctx = canvas.getContext('2d');
-    
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    
-    drawThrowSim2();
-    animateThrowSim2();
-}
-
-function updateThrowSim2() {
-    const input = document.getElementById('velocity-throw-2');
-    simState.throw2.velocity = parseFloat(input.value);
-    document.getElementById('velocity-display-2').textContent = simState.throw2.velocity;
-    throwReset2();
-}
-
-function throwStart2() {
-    if (simState.throw2.isRunning) return;
-    simState.throw2.time = 0;
-    simState.throw2.isRunning = true;
-    simState.throw2.maxH = 0;
-}
-
-function throwReset2() {
-    simState.throw2.time = 0;
-    simState.throw2.isRunning = false;
-    simState.throw2.ballY = 0;
-    simState.throw2.ballVelY = 0;
-    simState.throw2.maxH = 0;
-    document.getElementById('time-2').textContent = '0.0';
-    document.getElementById('height-2').textContent = '0.0';
-    document.getElementById('max-height-2').textContent = '0.0';
-}
-
-function drawThrowSim2() {
-    const { canvas, ctx, velocity, time, ballY, maxH } = simState.throw2;
-    const g = 9.81;
-    
-    ctx.fillStyle = '#2b5b9b';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    const pixelsPerMeter = 40; // pixels per meter
-    const groundLevel = canvas.height - 30;
-    const ballRadius = 8;
-    
-    // Position
-    const height = velocity * time - 0.5 * g * time * time;
-    const displayY = groundLevel - height * pixelsPerMeter;
-    
-    // Ground
-    ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(0, groundLevel);
-    ctx.lineTo(canvas.width, groundLevel);
-    ctx.stroke();
-    
-    // Max height line
-    if (maxH > 0) {
-        const maxY = groundLevel - maxH * pixelsPerMeter;
-        ctx.strokeStyle = 'rgba(0, 204, 255, 0.3)';
-        ctx.lineWidth = 1;
-        ctx.setLineDash([5, 5]);
-        ctx.beginPath();
-        ctx.moveTo(0, maxY);
-        ctx.lineTo(canvas.width, maxY);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        
-        ctx.fillStyle = '#a0a0a0';
-        ctx.font = '11px Arial';
-        ctx.textAlign = 'right';
-        ctx.fillText(`Peak: ${maxH.toFixed(1)}m`, canvas.width - 10, maxY - 5);
-    }
-    
-    // Ball
-    if (height > 0) {
-        ctx.fillStyle = '#ff6b6b';
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, displayY, ballRadius, 0, Math.PI * 2);
-        ctx.fill();
-    } else {
-        ctx.fillStyle = '#ff6b6b';
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, groundLevel, ballRadius, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
-
-function animateThrowSim2() {
-    if (simState.throw2.isRunning) {
-        const g = 9.81;
-        simState.throw2.time += 0.016;
-        
-        const height = simState.throw2.velocity * simState.throw2.time - 0.5 * g * simState.throw2.time * simState.throw2.time;
-        
-        // Track max height
-        if (height > simState.throw2.maxH) {
-            simState.throw2.maxH = height;
-        }
-        
-        // Stop at ground
-        if (height <= 0) {
-            simState.throw2.isRunning = false;
-        }
-        
-        document.getElementById('time-2').textContent = simState.throw2.time.toFixed(2);
-        document.getElementById('height-2').textContent = Math.max(0, height).toFixed(2);
-        document.getElementById('max-height-2').textContent = simState.throw2.maxH.toFixed(2);
-    }
-    
-    drawThrowSim2();
-    requestAnimationFrame(animateThrowSim2);
-}
-
-// ============================================
-// LESSON 3: ACCELERATION SIMULATION
-// ============================================
-
-function initAccelSim3() {
-    const canvas = document.getElementById('sim-accel-3');
-    if (!canvas) return;
-    
-    simState.accel3.canvas = canvas;
-    simState.accel3.ctx = canvas.getContext('2d');
-    
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    
-    drawAccelSim3();
-    animateAccelSim3();
-}
-
-function updateAccelSim3() {
-    const input = document.getElementById('accel-accel-3');
-    simState.accel3.accel = parseFloat(input.value);
-    document.getElementById('accel-display-3').textContent = simState.accel3.accel;
-    accelReset3();
-}
-
-function accelStart3() {
-    if (simState.accel3.isRunning) return;
-    simState.accel3.time = 0;
-    simState.accel3.isRunning = true;
-}
-
-function accelReset3() {
-    simState.accel3.time = 0;
-    simState.accel3.isRunning = false;
-    simState.accel3.carX = 20;
-    simState.accel3.carVel = 0;
-    document.getElementById('time-3').textContent = '0.0';
-    document.getElementById('vel-3').textContent = '0.0';
-    document.getElementById('dist-3').textContent = '0.0';
-}
-
-function drawAccelSim3() {
-    const { canvas, ctx, carX, carVel, accel } = simState.accel3;
-    
-    ctx.fillStyle = '#2b5b9b';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    const roadY = canvas.height / 2;
-    const carW = 50;
-    const carH = 25;
-    
-    // Road
-    ctx.strokeStyle = '#ffff00';
-    ctx.lineWidth = 2;
-    ctx.setLineDash([20, 10]);
-    ctx.beginPath();
-    ctx.moveTo(0, roadY + 12);
-    ctx.lineTo(canvas.width, roadY + 12);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    
-    // Car
-    ctx.fillStyle = '#ff6b6b';
-    ctx.fillRect(carX, roadY - carH / 2, carW, carH);
-    ctx.fillStyle = '#333';
-    ctx.fillRect(carX + 8, roadY - 8, 8, 8);
-    ctx.fillRect(carX + 32, roadY - 8, 8, 8);
-}
-
-function animateAccelSim3() {
-    if (simState.accel3.isRunning) {
-        simState.accel3.time += 0.016;
-        simState.accel3.carVel = simState.accel3.accel * simState.accel3.time;
-        const pixelsPerMeter = 3;
-        const distance = 0.5 * simState.accel3.accel * simState.accel3.time * simState.accel3.time;
-        simState.accel3.carX = 20 + distance * pixelsPerMeter;
-        
-        // Stop at edge
-        if (simState.accel3.carX > simState.accel3.canvas.width - 80) {
-            simState.accel3.isRunning = false;
-        }
-        
-        document.getElementById('time-3').textContent = simState.accel3.time.toFixed(2);
-        document.getElementById('vel-3').textContent = simState.accel3.carVel.toFixed(2);
-        document.getElementById('dist-3').textContent = (distance).toFixed(2);
-    }
-    
-    drawAccelSim3();
-    requestAnimationFrame(animateAccelSim3);
-}
-
-// ============================================
-// LESSON 4: BRAKING SIMULATION
-// ============================================
-
-function initBrakeSim4() {
-    const canvas = document.getElementById('sim-brake-4');
-    if (!canvas) return;
-    
-    simState.brake4.canvas = canvas;
-    simState.brake4.ctx = canvas.getContext('2d');
-    
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    
-    updateBrakeSim4();
-    drawBrakeSim4();
-    animateBrakeSim4();
-}
-
-function updateBrakeSim4() {
-    const speedInput = document.getElementById('speed-brake-4');
-    const decelInput = document.getElementById('decel-brake-4');
-    
-    simState.brake4.speed = parseFloat(speedInput.value);
-    simState.brake4.decel = parseFloat(decelInput.value);
-    
-    document.getElementById('speed-display-4').textContent = simState.brake4.speed;
-    document.getElementById('decel-display-4').textContent = simState.brake4.decel;
-    
-    // Calculate stopping distance: d = v²/(2a)
-    simState.brake4.stopDist = (simState.brake4.speed * simState.brake4.speed) / (2 * simState.brake4.decel);
-    
-    brakeReset4();
-}
-
-function brakeStart4() {
-    if (simState.brake4.isRunning) return;
-    simState.brake4.time = 0;
-    simState.brake4.carVel = simState.brake4.speed;
-    simState.brake4.isRunning = true;
-}
-
-function brakeReset4() {
-    simState.brake4.time = 0;
-    simState.brake4.isRunning = false;
-    simState.brake4.carX = 20;
-    simState.brake4.carVel = 0;
-    document.getElementById('time-4').textContent = '0.0';
-    document.getElementById('vel-4').textContent = '0.0';
-    document.getElementById('stop-dist-4').textContent = simState.brake4.stopDist.toFixed(2);
-}
-
-function drawBrakeSim4() {
-    const { canvas, ctx, carX, stopDist } = simState.brake4;
-    const pixelsPerMeter = 2;
-    
-    ctx.fillStyle = '#2b5b9b';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    const roadY = canvas.height / 2;
-    const carW = 50;
-    const carH = 25;
-    
-    // Road
-    ctx.strokeStyle = '#ffff00';
-    ctx.lineWidth = 2;
-    ctx.setLineDash([20, 10]);
-    ctx.beginPath();
-    ctx.moveTo(0, roadY + 12);
-    ctx.lineTo(canvas.width, roadY + 12);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    
-    // Stopping distance marker
-    const stopMarkerX = 20 + stopDist * pixelsPerMeter;
-    if (stopMarkerX < canvas.width - 20) {
-        ctx.strokeStyle = 'rgba(255, 100, 100, 0.5)';
+        const groundY = canvas.height - 30;
+        ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
-        ctx.setLineDash([10, 5]);
         ctx.beginPath();
-        ctx.moveTo(stopMarkerX, roadY - 30);
-        ctx.lineTo(stopMarkerX, roadY + 30);
+        ctx.moveTo(0, groundY);
+        ctx.lineTo(canvas.width, groundY);
+        ctx.stroke();
+
+        if (ballImage.complete && ballImage.naturalHeight !== 0) {
+            ctx.drawImage(ballImage, canvas.width / 2 - ballRadius, ballY - ballRadius, ballRadius * 2, ballRadius * 2);
+        } else {
+            ctx.fillStyle = '#ff6b6b';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, ballY, ballRadius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px Arial';
+        let yPos = 30;
+        if (toggles.vi) {
+            ctx.fillText(`Vi: ${stats.vi.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.vf) {
+            ctx.fillText(`Vf: ${stats.vf.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.time) {
+            ctx.fillText(`Time: ${stats.time.toFixed(2)} s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.distance) {
+            ctx.fillText(`Distance: ${Math.max(0, stats.distance).toFixed(2)} m`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.height) {
+            const height = (groundY - ballY) / 100;
+            ctx.fillText(`Height: ${Math.max(0, height).toFixed(2)} m`, 20, yPos);
+        }
+    }
+
+    function update() {
+        if (!isRunning) return;
+        const gravityPixelsPerFrame = 0.5;
+        ballVY += gravityPixelsPerFrame;
+        ballY += ballVY;
+        time += 1/60;
+
+        stats.vf = (ballVY / 100) * 60;
+        stats.time = time;
+        stats.distance = (ballY - 50) / 100;
+
+        const groundY = canvas.height - 30 - ballRadius;
+        if (ballY >= groundY) {
+            ballY = groundY;
+            ballVY = 0;
+            isRunning = false;
+        }
+    }
+
+    function animate() {
+        update();
+        draw();
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+
+    setTimeout(() => {
+        const startBtn = section ? section.querySelector('[data-lesson-sim="drop-start"]') : document.querySelector('[data-lesson-sim="drop-start"]');
+        const resetBtn = section ? section.querySelector('[data-lesson-sim="drop-reset"]') : document.querySelector('[data-lesson-sim="drop-reset"]');
+
+        if (startBtn) startBtn.addEventListener('click', () => {
+            ballY = 50;
+            ballVY = 0;
+            time = 0;
+            isRunning = true;
+        });
+
+        if (resetBtn) resetBtn.addEventListener('click', () => {
+            ballY = 50;
+            ballVY = 0;
+            time = 0;
+            isRunning = false;
+        });
+
+        ['lesson-toggle-vi', 'lesson-toggle-vf', 'lesson-toggle-time', 'lesson-toggle-distance', 'lesson-toggle-height'].forEach((id, idx) => {
+            const toggle = document.getElementById(id);
+            if (toggle) {
+                toggle.addEventListener('change', (e) => {
+                    const keys = ['vi', 'vf', 'time', 'distance', 'height'];
+                    toggles[keys[idx]] = e.target.checked;
+                });
+            }
+        });
+    }, 500);
+
+    console.log('✅ Lessons free fall sim loaded');
+})();
+
+// SIMULATION 2: THROW UP (for lessons)
+(function() {
+    const canvas = document.getElementById('lesson-canvas-throwing');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const section = canvas.closest('.lesson-page');
+    
+    const getGroundY = () => canvas.height - 50;
+    let ballY = getGroundY();
+    let ballVY = 0;
+    const ballRadius = 25;
+    const gravity = 0.15;
+    const pixelsPerMeter = 30;
+    let isRunning = false;
+    let time = 0;
+    let initialVel = 10;
+    let stats = { vi: 0, vf: 0, time: 0, maxHeight: 0, currentHeight: 0 };
+    let toggles = { vi: true, vf: true, time: true, maxHeight: true, height: true };
+    let ballImage = new Image();
+    
+    ballImage.onload = () => console.log('✅ Ball image loaded for lessons throw up');
+    ballImage.onerror = () => console.error('❌ Ball image failed to load');
+    ballImage.src = 'assets/ball.png';
+
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+        ballY = getGroundY();
+    }
+
+    function draw() {
+        ctx.fillStyle = '#2b5b9b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const groundY = getGroundY();
+        ctx.strokeStyle = '#00ff00';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, groundY);
+        ctx.lineTo(canvas.width, groundY);
+        ctx.stroke();
+
+        if (ballImage.complete && ballImage.naturalHeight !== 0) {
+            ctx.drawImage(ballImage, canvas.width / 2 - ballRadius, ballY - ballRadius, ballRadius * 2, ballRadius * 2);
+        } else {
+            ctx.fillStyle = '#ff6b6b';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, ballY, ballRadius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px Arial';
+        let yPos = 30;
+        if (toggles.vi) {
+            ctx.fillText(`Vi: ${stats.vi.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.vf) {
+            ctx.fillText(`Vf: ${stats.vf.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.time) {
+            ctx.fillText(`Time: ${stats.time.toFixed(2)} s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.maxHeight) {
+            ctx.fillText(`Max Height: ${stats.maxHeight.toFixed(2)} m`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.height) {
+            ctx.fillText(`Current Height: ${stats.currentHeight.toFixed(2)} m`, 20, yPos);
+        }
+    }
+
+    function update() {
+        if (!isRunning) return;
+        ballVY += gravity;
+        ballY += ballVY;
+        time += 1/60;
+
+        const groundY = getGroundY();
+        const currentHeight = (groundY - ballY) / pixelsPerMeter;
+        stats.currentHeight = Math.max(0, currentHeight);
+        if (stats.currentHeight > stats.maxHeight) {
+            stats.maxHeight = stats.currentHeight;
+        }
+        stats.vf = (ballVY / pixelsPerMeter) * 60;
+        stats.time = time;
+
+        if (ballY >= groundY) {
+            ballY = groundY;
+            ballVY = 0;
+            isRunning = false;
+        }
+    }
+
+    function animate() {
+        update();
+        draw();
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+
+    setTimeout(() => {
+        const startBtn = section ? section.querySelector('[data-lesson-sim="throw-start"]') : document.querySelector('[data-lesson-sim="throw-start"]');
+        const resetBtn = section ? section.querySelector('[data-lesson-sim="throw-reset"]') : document.querySelector('[data-lesson-sim="throw-reset"]');
+
+        if (startBtn) startBtn.addEventListener('click', () => {
+            ballY = getGroundY();
+            ballVY = -initialVel * 0.3;
+            time = 0;
+            stats.maxHeight = 0;
+            stats.currentHeight = 0;
+            stats.vi = initialVel;
+            isRunning = true;
+        });
+
+        if (resetBtn) resetBtn.addEventListener('click', () => {
+            ballY = getGroundY();
+            ballVY = 0;
+            time = 0;
+            stats = { vi: 0, vf: 0, time: 0, maxHeight: 0, currentHeight: 0 };
+            isRunning = false;
+        });
+    }, 500);
+
+    console.log('✅ Lessons throw up sim loaded');
+})();
+
+// SIMULATION 3: CAR SPEEDING (for lessons)
+(function() {
+    const canvas = document.getElementById('lesson-canvas-speeding');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const section = canvas.closest('.lesson-page');
+    
+    let carX = 20;
+    let carVX = 0;
+    let accel = 2;
+    let isRunning = false;
+    let time = 0;
+    let stats = { vi: 0, vf: 0, accel: 0, time: 0, distance: 0 };
+    let toggles = { vi: true, vf: true, accel: true, time: true, distance: true };
+    let carImage = new Image();
+    
+    carImage.onload = () => console.log('✅ Car image loaded for lessons speeding');
+    carImage.onerror = () => console.error('❌ Car image failed to load');
+    carImage.src = 'assets/car.png';
+
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+
+    function draw() {
+        const roadY = canvas.height / 2;
+        ctx.fillStyle = '#2b5b9b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = '#ffff00';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([20, 10]);
+        ctx.beginPath();
+        ctx.moveTo(0, roadY + 12);
+        ctx.lineTo(canvas.width, roadY + 12);
         ctx.stroke();
         ctx.setLineDash([]);
-    }
-    
-    // Car
-    ctx.fillStyle = '#ff6b6b';
-    ctx.fillRect(carX, roadY - carH / 2, carW, carH);
-    ctx.fillStyle = '#333';
-    ctx.fillRect(carX + 8, roadY - 8, 8, 8);
-    ctx.fillRect(carX + 32, roadY - 8, 8, 8);
-}
 
-function animateBrakeSim4() {
-    if (simState.brake4.isRunning) {
-        simState.brake4.time += 0.016;
-        simState.brake4.carVel = simState.brake4.speed - simState.brake4.decel * simState.brake4.time;
+        if (carImage.complete && carImage.naturalHeight !== 0) {
+            ctx.drawImage(carImage, carX, roadY - 35, 70, 70);
+        } else {
+            ctx.fillStyle = '#ff6b6b';
+            ctx.fillRect(carX, roadY - 12, 50, 25);
+            ctx.fillStyle = '#333';
+            ctx.fillRect(carX + 8, roadY - 8, 8, 8);
+            ctx.fillRect(carX + 32, roadY - 8, 8, 8);
+        }
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px Arial';
+        let yPos = 30;
+        if (toggles.vi) {
+            ctx.fillText(`Vi: ${stats.vi.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.vf) {
+            ctx.fillText(`Vf: ${stats.vf.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.accel) {
+            ctx.fillText(`Accel: ${stats.accel.toFixed(2)} m/s²`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.time) {
+            ctx.fillText(`Time: ${stats.time.toFixed(2)} s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.distance) {
+            ctx.fillText(`Distance: ${stats.distance.toFixed(2)} m`, 20, yPos);
+        }
+    }
+
+    function update() {
+        if (!isRunning) return;
+        carVX += accel / 60;
+        carX += carVX;
+        time += 1/60;
+
+        stats.vf = carVX;
+        stats.time = time;
+        stats.distance = carX - 20;
+
+        if (carX > canvas.width - 80) {
+            isRunning = false;
+        }
+    }
+
+    function animate() {
+        update();
+        draw();
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+
+    setTimeout(() => {
+        const startBtn = section ? section.querySelector('[data-lesson-sim="speed-start"]') : document.querySelector('[data-lesson-sim="speed-start"]');
+        const resetBtn = section ? section.querySelector('[data-lesson-sim="speed-reset"]') : document.querySelector('[data-lesson-sim="speed-reset"]');
+
+        if (startBtn) startBtn.addEventListener('click', () => {
+            carX = 20;
+            carVX = 0;
+            time = 0;
+            stats.accel = accel;
+            isRunning = true;
+        });
+
+        if (resetBtn) resetBtn.addEventListener('click', () => {
+            carX = 20;
+            carVX = 0;
+            time = 0;
+            stats = { vi: 0, vf: 0, accel: 0, time: 0, distance: 0 };
+            isRunning = false;
+        });
+    }, 500);
+
+    console.log('✅ Lessons car speeding sim loaded');
+})();
+
+// SIMULATION 4: CAR BRAKING (for lessons)
+(function() {
+    const canvas = document.getElementById('lesson-canvas-braking');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const section = canvas.closest('.lesson-page');
+    
+    let carX = 20;
+    let carVX = 0;
+    let initialVel = 20;
+    let decel = 2;
+    let isRunning = false;
+    let time = 0;
+    let stopDist = 0;
+    const pixelsPerMeter = 0.5;
+    let stats = { vi: 0, vf: 0, decel: 0, time: 0, distance: 0, stopDist: 0 };
+    let toggles = { vi: true, vf: true, decel: true, time: true, distance: true, stopDist: true };
+    let carImage = new Image();
+    
+    carImage.onload = () => console.log('✅ Car image loaded for lessons braking');
+    carImage.onerror = () => console.error('❌ Car image failed to load');
+    carImage.src = 'assets/car.png';
+
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+
+    function draw() {
+        const roadY = canvas.height / 2;
+        ctx.fillStyle = '#2b5b9b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = '#ffff00';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([20, 10]);
+        ctx.beginPath();
+        ctx.moveTo(0, roadY + 12);
+        ctx.lineTo(canvas.width, roadY + 12);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        if (stopDist > 0) {
+            const stopMarker = 20 + (stopDist * pixelsPerMeter);
+            if (stopMarker < canvas.width - 20) {
+                ctx.strokeStyle = 'rgba(255, 100, 100, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([10, 5]);
+                ctx.beginPath();
+                ctx.moveTo(stopMarker, roadY - 30);
+                ctx.lineTo(stopMarker, roadY + 30);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+        }
+
+        const maxCarX = Math.min(carX, canvas.width - 80);
+        if (carImage.complete && carImage.naturalHeight !== 0) {
+            ctx.drawImage(carImage, maxCarX, roadY - 35, 70, 70);
+        } else {
+            ctx.fillStyle = '#ff6b6b';
+            ctx.fillRect(maxCarX, roadY - 12, 50, 25);
+            ctx.fillStyle = '#333';
+            ctx.fillRect(maxCarX + 8, roadY - 8, 8, 8);
+            ctx.fillRect(maxCarX + 32, roadY - 8, 8, 8);
+        }
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px Arial';
+        let yPos = 30;
+        if (toggles.vi) {
+            ctx.fillText(`Vi: ${stats.vi.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.vf) {
+            ctx.fillText(`Vf: ${stats.vf.toFixed(2)} m/s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.decel) {
+            ctx.fillText(`Decel: ${stats.decel.toFixed(2)} m/s²`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.time) {
+            ctx.fillText(`Time: ${stats.time.toFixed(2)} s`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.distance) {
+            ctx.fillText(`Distance: ${stats.distance.toFixed(2)} m`, 20, yPos);
+            yPos += 25;
+        }
+        if (toggles.stopDist) {
+            ctx.fillText(`Stop Distance: ${stats.stopDist.toFixed(1)} m`, 20, yPos);
+        }
+    }
+
+    function update() {
+        if (!isRunning) return;
+        carVX -= decel / 60;
+        if (carVX <= 0) {
+            carVX = 0;
+            isRunning = false;
+        }
+        carX += carVX * pixelsPerMeter;
         
-        if (simState.brake4.carVel <= 0) {
-            simState.brake4.carVel = 0;
-            simState.brake4.isRunning = false;
+        if (carX > canvas.width - 80) {
+            carX = canvas.width - 80;
+            carVX = 0;
+            isRunning = false;
         }
         
-        const pixelsPerMeter = 2;
-        const distance = simState.brake4.speed * simState.brake4.time - 0.5 * simState.brake4.decel * simState.brake4.time * simState.brake4.time;
-        simState.brake4.carX = 20 + distance * pixelsPerMeter;
-        
-        document.getElementById('time-4').textContent = simState.brake4.time.toFixed(2);
-        document.getElementById('vel-4').textContent = Math.max(0, simState.brake4.carVel).toFixed(2);
+        time += 1/60;
+
+        stats.vf = Math.max(0, carVX);
+        stats.time = time;
+        stats.distance = carX - 20;
     }
-    
-    drawBrakeSim4();
-    requestAnimationFrame(animateBrakeSim4);
-}
 
-// ============================================
-// INITIALIZATION
-// ============================================
+    function animate() {
+        update();
+        draw();
+        requestAnimationFrame(animate);
+    }
 
-// Wait for DOM to load
-document.addEventListener('DOMContentLoaded', function() {
-    initDropSim1();
-    initThrowSim2();
-    initAccelSim3();
-    initBrakeSim4();
-});
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+
+    setTimeout(() => {
+        const startBtn = section ? section.querySelector('[data-lesson-sim="brake-start"]') : document.querySelector('[data-lesson-sim="brake-start"]');
+        const resetBtn = section ? section.querySelector('[data-lesson-sim="brake-reset"]') : document.querySelector('[data-lesson-sim="brake-reset"]');
+
+        if (startBtn) startBtn.addEventListener('click', () => {
+            carX = 20;
+            carVX = initialVel;
+            time = 0;
+            stats.vi = initialVel;
+            stats.decel = decel;
+            stopDist = (initialVel * initialVel) / (2 * decel);
+            stats.stopDist = stopDist;
+            isRunning = true;
+        });
+
+        if (resetBtn) resetBtn.addEventListener('click', () => {
+            carX = 20;
+            carVX = 0;
+            time = 0;
+            stopDist = (initialVel * initialVel) / (2 * decel);
+            stats = { vi: 0, vf: 0, decel: 0, time: 0, distance: 0, stopDist: stopDist };
+            isRunning = false;
+        });
+    }, 500);
+
+    console.log('✅ Lessons car braking sim loaded');
+})();
+
+console.log('✅✅✅ All lessons simulations loaded');

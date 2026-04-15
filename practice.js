@@ -302,9 +302,9 @@ function checkAnswer(userAnswer) {
         message = `✅ Correct! ${problemState.title}\nAnswer: ${problemState.currentProblem.answer.toFixed(2)} ${problemState.currentProblem.units}`;
     } else {
         if (problemState.currentAttempts === 1) {
-            message = '❌ Not quite. Try again or ask for a hint.';
+            message = '❌ Not quite. Try again!';
         } else if (problemState.currentAttempts === 2) {
-            message = '❌ Still not right. Here\'s a hint!';
+            message = '❌ Not correct! Here\'s a hint!';
             problemState.showHint = true;
         } else {
             message = `❌ The answer is ${problemState.currentProblem.answer.toFixed(2)} ${problemState.currentProblem.units}. Review the formula!`;
@@ -357,6 +357,16 @@ function getSolution() {
 function setDifficulty(level) {
     if (['easy', 'medium', 'hard'].includes(level)) {
         problemState.difficulty = level;
+        
+        // Update button colors
+        const buttons = document.querySelectorAll('.difficulty-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.toLowerCase() === level) {
+                btn.classList.add('active');
+            }
+        });
+        
         generateProblem();
         return true;
     }

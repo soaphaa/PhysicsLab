@@ -272,12 +272,18 @@ body {
 h1 {
     justify-content: center;
     font-weight: 800;
-    font-size: 110px;
+    font-size: 130px;
     color: #ffffff;
     letter-spacing: -2px;
     line-height: 1.2;
     margin-bottom: 20px;
     padding: 10 15;
+    text-shadow: 0px 4px 30px rgba(231, 243, 255);
+    transition: all 0.3s ease;
+}
+
+h1:hover{
+        transform: translateY(-2px);
 }
 
 h1 span {
@@ -376,6 +382,18 @@ button:hover {
 
 }
 
+/* Difficulty button active state */
+.difficulty-btn.active {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.5);
+}
+
+.difficulty-btn.active:hover {
+    background: linear-gradient(135deg, #0077dd 0%, #00aaff 100%);
+    box-shadow: 0 12px 32px rgba(0, 102, 204, 0.7);
+}
 
 
 /* SECTIONS */
@@ -639,6 +657,7 @@ button:hover {
 
     h1 {
         font-size: 48px;
+        
     }
 
     h3 {

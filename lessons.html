@@ -10,7 +10,7 @@
 
 <body>
     <nav class="top-nav">
-        <div class="nav-brand" onclick="window.location.href='index.html'"><img src="assets/logo-physicslab.png" alt="PhysicsLab"></div>
+        <div class="nav-brand" onclick="window.location.href='index.html'"><img src="assets/logo.png" alt="PhysicsLab"></div>
         <ul class="nav-menu">
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="lessons.html" class="nav-link active">Lessons</a></li>
@@ -144,23 +144,8 @@
 
                         <div class="lesson-section">
                             <h3>Try it yourself</h3>
-                            <p>Adjust the height and watch how long it takes to fall:</p>
-                            <div class="mini-sim">
-                                <canvas id="sim-drop-1" width="400" height="300"></canvas>
-                                <div class="sim-controls">
-                                    <div class="control-row">
-                                        <label>Height (m): <input type="range" id="height-drop-1" min="10" max="100" value="50" step="5" onchange="updateDropSim1()"> <span id="height-display-1">50</span></label>
-                                    </div>
-                                    <div class="control-row">
-                                        <button onclick="dropStart1()">Start</button>
-                                        <button onclick="dropReset1()">Reset</button>
-                                    </div>
-                                    <div class="sim-stats">
-                                        <div>Time: <strong id="time-1">0.0</strong>s</div>
-                                        <div>Velocity: <strong id="vel-1">0.0</strong> m/s</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p>Click the button below to try the interactive simulation:</p>
+                            <a href="index.html#sim-dropping" class="btn btn-primary" style="display: inline-block; margin-top: 15px;">▶ Open Free Fall Simulation</a>
                         </div>
 
                         <div class="lesson-section">
@@ -206,24 +191,8 @@
 
                         <div class="lesson-section">
                             <h3>Try it yourself</h3>
-                            <p>Change the initial velocity and see how high it goes:</p>
-                            <div class="mini-sim">
-                                <canvas id="sim-throw-2" width="400" height="300"></canvas>
-                                <div class="sim-controls">
-                                    <div class="control-row">
-                                        <label>Initial Velocity (m/s): <input type="range" id="velocity-throw-2" min="5" max="40" value="20" step="2" onchange="updateThrowSim2()"> <span id="velocity-display-2">20</span></label>
-                                    </div>
-                                    <div class="control-row">
-                                        <button onclick="throwStart2()">Launch</button>
-                                        <button onclick="throwReset2()">Reset</button>
-                                    </div>
-                                    <div class="sim-stats">
-                                        <div>Time: <strong id="time-2">0.0</strong>s</div>
-                                        <div>Height: <strong id="height-2">0.0</strong>m</div>
-                                        <div>Max Height: <strong id="max-height-2">0.0</strong>m</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p>Click the button below to try the interactive simulation:</p>
+                            <a href="index.html#sim-throwing" class="btn btn-primary" style="display: inline-block; margin-top: 15px;">▶ Open Throwing Up Simulation</a>
                         </div>
 
                         <div class="lesson-section">
@@ -265,24 +234,8 @@
 
                         <div class="lesson-section">
                             <h3>Try it yourself</h3>
-                            <p>Watch the car accelerate at different rates:</p>
-                            <div class="mini-sim">
-                                <canvas id="sim-accel-3" width="400" height="250"></canvas>
-                                <div class="sim-controls">
-                                    <div class="control-row">
-                                        <label>Acceleration (m/s²): <input type="range" id="accel-accel-3" min="1" max="8" value="3" step="0.5" onchange="updateAccelSim3()"> <span id="accel-display-3">3</span></label>
-                                    </div>
-                                    <div class="control-row">
-                                        <button onclick="accelStart3()">Start</button>
-                                        <button onclick="accelReset3()">Reset</button>
-                                    </div>
-                                    <div class="sim-stats">
-                                        <div>Time: <strong id="time-3">0.0</strong>s</div>
-                                        <div>Velocity: <strong id="vel-3">0.0</strong> m/s</div>
-                                        <div>Distance: <strong id="dist-3">0.0</strong>m</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p>Click the button below to try the interactive simulation:</p>
+                            <a href="index.html#sim-speeding" class="btn btn-primary" style="display: inline-block; margin-top: 15px;">▶ Open Acceleration Simulation</a>
                         </div>
 
                         <div class="lesson-section">
@@ -324,27 +277,8 @@
 
                         <div class="lesson-section">
                             <h3>Try it yourself</h3>
-                            <p>Change initial speed and deceleration to see stopping distance:</p>
-                            <div class="mini-sim">
-                                <canvas id="sim-brake-4" width="400" height="250"></canvas>
-                                <div class="sim-controls">
-                                    <div class="control-row">
-                                        <label>Initial Speed (m/s): <input type="range" id="speed-brake-4" min="10" max="50" value="30" step="2" onchange="updateBrakeSim4()"> <span id="speed-display-4">30</span></label>
-                                    </div>
-                                    <div class="control-row">
-                                        <label>Deceleration (m/s²): <input type="range" id="decel-brake-4" min="2" max="10" value="5" step="0.5" onchange="updateBrakeSim4()"> <span id="decel-display-4">5</span></label>
-                                    </div>
-                                    <div class="control-row">
-                                        <button onclick="brakeStart4()">Start Braking</button>
-                                        <button onclick="brakeReset4()">Reset</button>
-                                    </div>
-                                    <div class="sim-stats">
-                                        <div>Time: <strong id="time-4">0.0</strong>s</div>
-                                        <div>Velocity: <strong id="vel-4">0.0</strong> m/s</div>
-                                        <div>Stopping Distance: <strong id="stop-dist-4">0.0</strong>m</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p>Click the button below to try the interactive simulation:</p>
+                            <a href="index.html#sim-braking" class="btn btn-primary" style="display: inline-block; margin-top: 15px;">▶ Open Braking Simulation</a>
                         </div>
 
                         <div class="lesson-section">
@@ -364,6 +298,5 @@
     </div>
     
     <script src="navigation.js"></script>
-    <script src="lesson-simulations.js"></script>
 </body>
 </html>
